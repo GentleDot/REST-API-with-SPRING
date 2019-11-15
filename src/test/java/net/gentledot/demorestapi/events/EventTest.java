@@ -8,14 +8,13 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class EventTest {
 
     @Test
-    public void builder(){
+    public void builder() {
         Event event = Event.eventBuilder()
-                        .name("my Spring REST API")
-                        .description("REST API development with Spring")
-                        .build();
+                .name("my Spring REST API")
+                .description("REST API development with Spring")
+                .build();
         assertThat(event).isNotNull();
     }
-
 
     @Test
     public void javaBean(){
