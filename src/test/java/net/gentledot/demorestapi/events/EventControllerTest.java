@@ -10,11 +10,12 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
 @WebMvcTest
-public class EventControllerTests {
+public class EventControllerTest {
 
     @Autowired
     MockMvc mockMvc;
@@ -23,10 +24,11 @@ public class EventControllerTests {
     @Test
     public void createEvent() throws Exception {
         mockMvc.perform(post("/api/events/")
-        .contentType(MediaType.APPLICATION_JSON)
-                .accept(MediaTypes.HAL_JSON)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .accept(MediaTypes.HAL_JSON)
 //                .content()
         )   // 요청
-        .andExpect(status().isCreated());
+                .andDo(print())
+                .andExpect(status().isCreated());
     }
 }
