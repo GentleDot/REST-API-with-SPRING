@@ -2,13 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d91a007d-707d-443a-84aa-0702028bf42f" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/REST-API-with-SPRING.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/REST-API-with-SPRING.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/gentledot/demorestapi/events/EventController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/net/gentledot/demorestapi/events/EventControllerTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/net/gentledot/demorestapi/events/EventControllerTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/gentledot/demorestapi/events/EventController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/gentledot/demorestapi/events/EventController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/net/gentledot/demorestapi/events/EventControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/net/gentledot/demorestapi/events/EventControllerTest.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -56,10 +53,6 @@
       </MavenImportingSettings>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6" fullScreen="true">
-    <option name="width" value="1440" />
-    <option name="height" value="900" />
-  </component>
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
@@ -92,7 +85,22 @@
       </list>
     </option>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="JUnit.EventControllerTest (1)">
+    <configuration name="EventControllerTest (1)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="learn-rest-api" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="net.gentledot.demorestapi.events.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="net.gentledot.demorestapi.events" />
+      <option name="MAIN_CLASS_NAME" value="net.gentledot.demorestapi.events.EventControllerTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="EventControllerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="REST-API-with-SPRING" />
       <extension name="coverage">
@@ -110,6 +118,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.EventControllerTest (1)" />
         <item itemvalue="JUnit.EventControllerTest" />
       </list>
     </recent_temporary>
