@@ -33,6 +33,6 @@ public class Event {
     private boolean free;   // 무료 여부
     // enum은 default가 EnumType.ORDINAL (순서에 따라 0, 1, n)
     @Enumerated(EnumType.STRING)
-    private EventStatus eventStatus;
+    private EventStatus eventStatus = EventStatus.DRAFT;
 
 }
