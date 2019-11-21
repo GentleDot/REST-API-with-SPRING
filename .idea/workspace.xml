@@ -3,14 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="d91a007d-707d-443a-84aa-0702028bf42f" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/learn-rest-api.iml" beforeDir="false" afterPath="$PROJECT_DIR$/learn-rest-api.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/gentledot/demorestapi/DemoRestApiApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/gentledot/demorestapi/DemoRestApiApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/gentledot/demorestapi/events/Event.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/gentledot/demorestapi/events/Event.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/gentledot/demorestapi/events/EventController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/gentledot/demorestapi/events/EventController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/net/gentledot/demorestapi/events/EventControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/net/gentledot/demorestapi/events/EventControllerTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/net/gentledot/demorestapi/events/Event.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/net/gentledot/demorestapi/events/Event.class" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -139,6 +133,22 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="EventControllerTest.createEvent_BadRequest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="learn-rest-api" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="net.gentledot.demorestapi.events.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="net.gentledot.demorestapi.events" />
+      <option name="MAIN_CLASS_NAME" value="net.gentledot.demorestapi.events.EventControllerTest" />
+      <option name="METHOD_NAME" value="createEvent_BadRequest" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="DemoRestApiApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <module name="learn-rest-api" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="net.gentledot.demorestapi.DemoRestApiApplication" />
@@ -150,10 +160,12 @@
       <item itemvalue="JUnit.EventControllerTest" />
       <item itemvalue="Spring Boot.DemoRestApiApplication" />
       <item itemvalue="JUnit.EventControllerTest (1)" />
+      <item itemvalue="JUnit.EventControllerTest.createEvent_BadRequest" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="JUnit.EventControllerTest (1)" />
+        <item itemvalue="JUnit.EventControllerTest.createEvent_BadRequest" />
         <item itemvalue="JUnit.EventControllerTest" />
         <item itemvalue="JUnit.EventControllerTest" />
       </list>
@@ -172,7 +184,7 @@
       <workItem from="1573546815492" duration="424000" />
       <workItem from="1573547274239" duration="576000" />
       <workItem from="1573783935657" duration="3947000" />
-      <workItem from="1574244124392" duration="11562000" />
+      <workItem from="1574244124392" duration="12998000" />
     </task>
     <servers />
   </component>
