@@ -25,16 +25,25 @@ public class EventController {
 //    EventRepository eventRepository;
     private final EventRepository eventRepository;
     private final ModelMapper modelMapper;
+    private final EventValidator eventValidator;
+
 
     @Autowired   // Spring 4.2 ~ 파라미터가 하나만 있는 상태는 autowired 생략 가능)
-    public EventController(EventRepository eventRepository, ModelMapper modelMapper) {
+    public EventController(EventRepository eventRepository, ModelMapper modelMapper, EventValidator eventValidator) {
         this.eventRepository = eventRepository;
         this.modelMapper = modelMapper;
+        this.eventValidator = eventValidator;
     }
 
 
     @PostMapping
     public ResponseEntity createEvent(@RequestBody @Valid EventDto eventDto, Errors errors) {
+        if (errors.hasErrors()){
+            return ResponseEntity.badRequest().build();
+        }
+
+        eventValidator.validate(eventDto, errors);
+
         if (errors.hasErrors()){
             return ResponseEntity.badRequest().build();
         }
