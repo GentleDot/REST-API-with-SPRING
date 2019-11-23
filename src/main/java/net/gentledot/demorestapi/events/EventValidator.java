@@ -21,14 +21,30 @@ public class EventValidator {
             errors.rejectValue("maxPrice", "wrongValue", "MaxPrice is wrong.");
         }
 
-        if (endEventDateTime.isBefore(beginEnrollmentDateTime) ||
-                endEventDateTime.isBefore(beginEnrollmentDateTime) ||
-                endEventDateTime.isBefore(closeEnrollmentDateTime)){
+        if (beginEnrollmentDateTime.isAfter(endEventDateTime) ||
+                beginEnrollmentDateTime.isAfter(beginEventDateTime) ||
+                beginEnrollmentDateTime.isAfter(closeEnrollmentDateTime)) {
+            errors.rejectValue("beginEnrollmentDateTime", "wrongValue", "beginEnrollmentDateTime is wrong.");
+        }
+
+        if (closeEnrollmentDateTime.isAfter(endEventDateTime) ||
+                closeEnrollmentDateTime.isAfter(beginEventDateTime) ||
+                closeEnrollmentDateTime.isBefore(beginEnrollmentDateTime)) {
+            errors.rejectValue("closeEnrollmentDateTime", "wrongValue", "closeEnrollmentDateTime is wrong.");
+        }
+
+        if (beginEventDateTime.isAfter(endEventDateTime) ||
+                beginEventDateTime.isBefore(closeEnrollmentDateTime) ||
+                beginEventDateTime.isBefore(beginEnrollmentDateTime)) {
+            errors.rejectValue("beginEventDateTime", "wrongValue", "BeginEventDateTime is wrong.");
+        }
+
+        if (endEventDateTime.isBefore(beginEventDateTime) ||
+                endEventDateTime.isBefore(closeEnrollmentDateTime) ||
+                endEventDateTime.isBefore(beginEnrollmentDateTime)) {
             errors.rejectValue("endEventDateTime", "wrongValue", "EndEventDateTime is wrong.");
         }
 
-        // TODO BeginEventDateTime
-        // TODO CloseEnrollmentDateTime
 
     }
 }

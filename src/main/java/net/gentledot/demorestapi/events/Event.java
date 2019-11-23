@@ -12,11 +12,11 @@ import java.time.LocalDateTime;
 @Getter // (getXXX 생성)
 @Setter // (setXXX 생성)
 @EqualsAndHashCode(of = "id")   // ??
-@Entity // ??
+@Entity // JPA 설정
 public class Event {
 
     @Id // ??
-    @GeneratedValue     // ??
+    @GeneratedValue     // JPA에서 자동 생성
     private Integer id;
     private String name;    // 이벤트 이름
     private String description;     // 이벤트 설명
