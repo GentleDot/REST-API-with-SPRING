@@ -35,4 +35,20 @@ public class Event {
     @Enumerated(EnumType.STRING)
     private EventStatus eventStatus = EventStatus.DRAFT;
 
+    public void updateFree() {
+        if (this.basePrice == 0 && this.maxPrice == 0){
+            this.free = true;
+        } else {
+            this.free = false;
+        }
+    }
+
+    public void updateOffline() {
+        // this.location.isBlank() : java11 부터 등장, 공백 trim 및 공백문자 replace 후 this.location.isEmpty() 처리
+        if (this.location == null || this.location.isBlank()){
+            this.offline = false;
+        } else {
+            this.offline = true;
+        }
+    }
 }

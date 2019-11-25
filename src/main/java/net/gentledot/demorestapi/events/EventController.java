@@ -21,16 +21,15 @@ import static org.springframework.hateoas.server.mvc.ControllerLinkBuilder.linkT
 @RequestMapping(value = "/api/events", produces = MediaTypes.HAL_JSON_VALUE)
 public class EventController {
 
-    //    @Autowired
-//    EventRepository eventRepository;
-    private final EventRepository eventRepository;
     private final ModelMapper modelMapper;
     private final EventValidator eventValidator;
 
+    @Autowired
+    EventService eventService;
+
 
     @Autowired   // Spring 4.2 ~ 파라미터가 하나만 있는 상태는 autowired 생략 가능)
-    public EventController(EventRepository eventRepository, ModelMapper modelMapper, EventValidator eventValidator) {
-        this.eventRepository = eventRepository;
+    public EventController(ModelMapper modelMapper, EventValidator eventValidator) {
         this.modelMapper = modelMapper;
         this.eventValidator = eventValidator;
     }
@@ -56,8 +55,9 @@ public class EventController {
                 .build();
        */
         Event event = this.modelMapper.map(eventDto, Event.class);
+        event = eventService.updateEvent(event);
 
-        Event newEvent = this.eventRepository.save(event);
+        Event newEvent = eventService.setNewEvent(event);
         URI createUri = linkTo(EventController.class).slash(newEvent.getId()).toUri();
         return ResponseEntity.created(createUri).body(event);
     }
