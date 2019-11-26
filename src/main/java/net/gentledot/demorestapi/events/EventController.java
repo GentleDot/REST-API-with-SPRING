@@ -3,6 +3,8 @@ package net.gentledot.demorestapi.events;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.MediaTypes;
+import org.springframework.hateoas.server.mvc.ControllerLinkBuilder;
+import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
@@ -13,9 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.validation.Valid;
 import java.net.URI;
 
-import static org.springframework.hateoas.server.mvc.ControllerLinkBuilder.linkTo;
+// import static org.springframework.hateoas.server.mvc.ControllerLinkBuilder.linkTo << deprecated
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 
-/* deprecated 이므로 대체 함수를 확인해야 함 : 20191119_gentledot*/
 
 @Controller
 @RequestMapping(value = "/api/events", produces = MediaTypes.HAL_JSON_VALUE)
@@ -58,7 +60,12 @@ public class EventController {
         event = eventService.updateEvent(event);
 
         Event newEvent = eventService.setNewEvent(event);
-        URI createUri = linkTo(EventController.class).slash(newEvent.getId()).toUri();
-        return ResponseEntity.created(createUri).body(event);
+
+        WebMvcLinkBuilder selfLinkBuilder = linkTo(EventController.class).slash(newEvent.getId());
+        URI createUri = selfLinkBuilder.toUri();
+
+        EventResource eventResource = new EventResource(event);
+
+        return ResponseEntity.created(createUri).body(eventResource);
     }
 }

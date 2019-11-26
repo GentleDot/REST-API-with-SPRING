@@ -3,9 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="d91a007d-707d-443a-84aa-0702028bf42f" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/learn-rest-api.iml" beforeDir="false" afterPath="$PROJECT_DIR$/learn-rest-api.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/net/gentledot/demorestapi/events/EventTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/net/gentledot/demorestapi/events/EventTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/gentledot/demorestapi/events/EventController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/gentledot/demorestapi/events/EventController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/net/gentledot/demorestapi/events/EventControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/net/gentledot/demorestapi/events/EventControllerTest.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -90,7 +89,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.EventTest">
+  <component name="RunManager" selected="JUnit.EventControllerTest (1)">
     <configuration name="EventControllerTest (1)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="learn-rest-api" />
       <extension name="coverage">
@@ -202,8 +201,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.EventTest" />
         <item itemvalue="JUnit.EventControllerTest (1)" />
+        <item itemvalue="JUnit.EventTest" />
         <item itemvalue="JUnit.EventControllerTest.createEvent" />
         <item itemvalue="JUnit.EventControllerTest.createEvent_BadRequest" />
         <item itemvalue="JUnit.EventControllerTest" />
