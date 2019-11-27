@@ -1,9 +1,8 @@
 package net.gentledot.demorestapi.events;
 
+import net.gentledot.demorestapi.common.ErrorEntityModel;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.MediaTypes;
-import org.springframework.hateoas.server.mvc.ControllerLinkBuilder;
 import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -39,13 +38,13 @@ public class EventController {
     @PostMapping
     public ResponseEntity createEvent(@RequestBody @Valid EventDto eventDto, Errors errors) {
         if (errors.hasErrors()) {
-            return ResponseEntity.badRequest().body(errors);
+            return badRequest(errors);
         }
 
         eventValidator.validate(eventDto, errors);
 
         if (errors.hasErrors()) {
-            return ResponseEntity.badRequest().body(errors);
+            return badRequest(errors);
         }
 
         // ModelMapper를 통해 Entity로 변환하는 과정을 생략할 수 있음.
@@ -63,8 +62,12 @@ public class EventController {
         WebMvcLinkBuilder selfLinkBuilder = linkTo(EventController.class).slash(newEvent.getId());
         URI createUri = selfLinkBuilder.toUri();
 
-        EventResource eventResource = new EventResource(event);
+        EventEntityModel eventEntityModel = new EventEntityModel(event);
 
-        return ResponseEntity.created(createUri).body(eventResource);
+        return ResponseEntity.created(createUri).body(eventEntityModel);
+    }
+
+    private ResponseEntity badRequest(Errors errors) {
+        return ResponseEntity.badRequest().body(new ErrorEntityModel(errors));
     }
 }
