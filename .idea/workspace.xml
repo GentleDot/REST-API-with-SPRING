@@ -2,6 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d91a007d-707d-443a-84aa-0702028bf42f" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/gentledot/demorestapi/events/EventController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/gentledot/demorestapi/events/EventController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/gentledot/demorestapi/events/EventResource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/gentledot/demorestapi/events/EventResource.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/net/gentledot/demorestapi/events/EventControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/net/gentledot/demorestapi/events/EventControllerTest.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -45,11 +49,6 @@
       </MavenImportingSettings>
     </option>
   </component>
-  <component name="ProjectFrameBounds">
-    <option name="y" value="23" />
-    <option name="width" value="1440" />
-    <option name="height" value="797" />
-  </component>
   <component name="ProjectId" id="1TsLzddqGGWvGQxAcrqbK6poWbC" />
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="1" id="Add" />
@@ -68,7 +67,8 @@
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.53333336" />
-    <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
+    <property name="settings.editor.selected.configurable" value="MTConfigurable" />
+    <property name="settings.editor.splitter.proportion" value="0.2319842" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -194,8 +194,8 @@
       <item itemvalue="JUnit.EventControllerTest (1)" />
       <item itemvalue="JUnit.EventControllerTest.createEvent_BadRequest" />
       <item itemvalue="JUnit.EventControllerTest.createEvent" />
-      <item itemvalue="Spring Boot.DemoRestApiApplication" />
       <item itemvalue="JUnit.EventTest" />
+      <item itemvalue="Spring Boot.DemoRestApiApplication" />
     </list>
     <recent_temporary>
       <list>
@@ -223,6 +223,9 @@
       <workItem from="1574244124392" duration="19291000" />
       <workItem from="1574484328962" duration="182000" />
       <workItem from="1574484703294" duration="5701000" />
+      <workItem from="1574827852477" duration="2405000" />
+      <workItem from="1574830418959" duration="2102000" />
+      <workItem from="1574835947586" duration="4821000" />
     </task>
     <servers />
   </component>
