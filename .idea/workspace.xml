@@ -3,9 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="d91a007d-707d-443a-84aa-0702028bf42f" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/learn-rest-api.iml" beforeDir="false" afterPath="$PROJECT_DIR$/learn-rest-api.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/gentledot/demorestapi/events/EventController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/gentledot/demorestapi/events/EventController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/gentledot/demorestapi/events/EventResource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/gentledot/demorestapi/events/EventResource.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/net/gentledot/demorestapi/events/EventControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/net/gentledot/demorestapi/events/EventControllerTest.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -57,14 +57,14 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/.." />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/test/resources" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
-    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.53333336" />
     <property name="settings.editor.selected.configurable" value="MTConfigurable" />
@@ -72,6 +72,7 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\workspace\study\spring-rest-api\src\test\resources" />
       <recent name="$PROJECT_DIR$/.." />
     </key>
   </component>
@@ -225,7 +226,7 @@
       <workItem from="1574484703294" duration="5701000" />
       <workItem from="1574827852477" duration="2405000" />
       <workItem from="1574830418959" duration="2102000" />
-      <workItem from="1574835947586" duration="4821000" />
+      <workItem from="1574835947586" duration="7924000" />
     </task>
     <servers />
   </component>
