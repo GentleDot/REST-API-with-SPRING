@@ -2,11 +2,18 @@ package net.gentledot.demorestapi.events;
 
 import net.gentledot.demorestapi.common.ErrorEntityModel;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PagedResourcesAssembler;
+import org.springframework.hateoas.EntityModel;
+import org.springframework.hateoas.Link;
 import org.springframework.hateoas.MediaTypes;
+import org.springframework.hateoas.PagedModel;
 import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,8 +21,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.validation.Valid;
 import java.net.URI;
 
-// import static org.springframework.hateoas.server.mvc.ControllerLinkBuilder.linkTo << deprecated
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+
+// import static org.springframework.hateoas.server.mvc.ControllerLinkBuilder.linkTo << deprecated
 
 
 @Controller
@@ -65,6 +73,19 @@ public class EventController {
         EventEntityModel eventEntityModel = new EventEntityModel(event);
 
         return ResponseEntity.created(createUri).body(eventEntityModel);
+    }
+
+    @GetMapping
+    public ResponseEntity getEvents(Pageable pageable, PagedResourcesAssembler<Event> resourcesAssembler) {
+        Page<Event> page = this.eventService.getEventsWithPaging(pageable);
+
+        WebMvcLinkBuilder eventLink = linkTo(EventController.class);
+        // Resource -> Model
+        PagedModel<EntityModel<Event>> entityModels = resourcesAssembler.toModel(page, entity -> new EventEntityModel(entity)
+        .removeLinks()
+        .add(eventLink.slash(entity.getId()).withSelfRel()));
+        entityModels.add(new Link("/docs/index.html#resources-events-list").withRel("profile"));
+        return ResponseEntity.ok(entityModels);
     }
 
     private ResponseEntity badRequest(Errors errors) {

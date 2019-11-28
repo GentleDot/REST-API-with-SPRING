@@ -8,7 +8,7 @@
 
 ## 출처 
 * 강좌
-    1. 스프링 기반 REST-API 개발 (https://www.inflearn.com/course/spring_rest-api)
+    1. 스프링 기반 REST-API 개발 / 백기선 (https://www.inflearn.com/course/spring_rest-api)
 
 * 참고자료
     1. MAVEN WINDOWS 설치 (https://zetawiki.com/wiki/%EC%9C%88%EB%8F%84%EC%9A%B0_%EB%A9%94%EC%9D%B4%EB%B8%90_%EC%84%A4%EC%B9%98)

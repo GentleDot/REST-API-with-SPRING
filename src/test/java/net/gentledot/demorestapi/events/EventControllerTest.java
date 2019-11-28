@@ -26,6 +26,7 @@ import static org.springframework.restdocs.hypermedia.HypermediaDocumentation.li
 import static org.springframework.restdocs.hypermedia.HypermediaDocumentation.links;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.payload.PayloadDocumentation.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -49,13 +50,16 @@ public class EventControllerTest {
     @Autowired
     ObjectMapper objectMapper;
 
+    @Autowired
+    EventRepository eventRepository;
+
     // @WebMvcTest는 MVC 관련 Bean을 테스트배드에 올리는 것이므로 Transaction 처리 결과는 모두 Null
     // 따라서 Transaction에 대한 처리 방식이 어떻게 되는지 구현 필요 (Stubbing)
     // Bean 전체를 테스트배드에 올리는 @SpringBootTest 를 설정하면 Stubbing이 불필요 (통합 테스트)
 //    @MockBean
 //    EventRepository eventRepository;
 
-    private FieldDescriptor[] eventFields = new FieldDescriptor[]{
+    private FieldDescriptor[] postEventFields = new FieldDescriptor[]{
             fieldWithPath("name").description("name of new event"),
             fieldWithPath("description").description("description of new event"),
             fieldWithPath("beginEnrollmentDateTime").description("date time of beginEnrollmentDateTime"),
@@ -66,6 +70,24 @@ public class EventControllerTest {
             fieldWithPath("basePrice").description("basePrice of new event"),
             fieldWithPath("maxPrice").description("maxPrice of new event"),
             fieldWithPath("limitOfEnrollment").description("limit Of enrollment")
+    };
+
+    private FieldDescriptor[] getEventFields = new FieldDescriptor[]{
+            fieldWithPath("_embedded.eventList[].id").description("identifier of new event"),
+            fieldWithPath("_embedded.eventList[].offline").description("information about if this event is offline event or not"),
+            fieldWithPath("_embedded.eventList[].free").description("information about if this event is free or not"),
+            fieldWithPath("_embedded.eventList[].eventStatus").description("event status"),
+            fieldWithPath("_embedded.eventList[].name").description("name of new event"),
+            fieldWithPath("_embedded.eventList[].description").description("description of new event"),
+            fieldWithPath("_embedded.eventList[].beginEnrollmentDateTime").description("date time of beginEnrollmentDateTime"),
+            fieldWithPath("_embedded.eventList[].closeEnrollmentDateTime").description("date time of closeEnrollmentDateTime"),
+            fieldWithPath("_embedded.eventList[].beginEventDateTime").description("date time of beginEventDateTime"),
+            fieldWithPath("_embedded.eventList[].endEventDateTime").description("date time of endEventDateTime"),
+            fieldWithPath("_embedded.eventList[].location").description("location of new event"),
+            fieldWithPath("_embedded.eventList[].basePrice").description("basePrice of new event"),
+            fieldWithPath("_embedded.eventList[].maxPrice").description("maxPrice of new event"),
+            fieldWithPath("_embedded.eventList[].limitOfEnrollment").description("limit Of enrollment"),
+            fieldWithPath("_embedded.eventList[]._links.self.href").description("self link")
     };
 
     /* 입력 값을 전달 시 JSON 응답으로 status=201 나오는지 확인 - DTO 이외의 값은 무시, default로 설정됨*/
@@ -124,7 +146,7 @@ public class EventControllerTest {
                                 headerWithName(HttpHeaders.CONTENT_TYPE).description("content header")
                         ),
                         requestFields(
-                                this.eventFields
+                                this.postEventFields
                         ),
                         responseHeaders(
                                 headerWithName(HttpHeaders.LOCATION).description("location header (생성된 이벤트 조회 url)"),
@@ -136,7 +158,7 @@ public class EventControllerTest {
                                 fieldWithPath("free").description("information about if this event is free or not"),
                                 fieldWithPath("eventStatus").description("event status"),
                                 subsectionWithPath("_links").description("links in event (self, query-events, update-event)")
-                        ).and(this.eventFields))
+                        ).and(this.postEventFields))
                 );
     }
 
@@ -220,4 +242,66 @@ public class EventControllerTest {
                 .andExpect(jsonPath("content[0].code").exists())
                 .andExpect(jsonPath("_links.index").exists());
     }
+
+
+    @Test
+    @TestDescription("30개의 이벤트를 10개씩 출력하여 2번째 페이지 조회하기")
+    public void getEvents_with_paging() throws Exception {
+        //  given
+        //  when
+
+        // Lambda
+//        IntStream.range(0, 30).forEach(i -> {
+//            this.generateEvent(i);
+//        });
+        // Method Reference
+//        IntStream.range(0, 30).forEach(this::generateEvent);
+        // For loop
+        for (int i = 0; i < 30; i++) {
+            this.generateEvent(i);
+        }
+
+        // then
+        this.mockMvc.perform(get("/api/events")
+                .param("page", "1")
+                .param("size", "10")
+                .param("sort", "name,DESC"))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("page").exists())
+                .andExpect(jsonPath("_links.self").exists())
+                .andExpect(jsonPath("_links.profile").exists())
+                .andDo(document("query-event",
+                        links(
+                                linkWithRel("first").description("link to first event page"),
+                                linkWithRel("prev").description("link to previous event page"),
+                                linkWithRel("self").description("link to self"),
+                                linkWithRel("next").description("link to next event page"),
+                                linkWithRel("last").description("link to last event page"),
+                                linkWithRel("profile").description("link to profile (how to get eventInfo)")
+                        ),
+                        responseHeaders(
+                                headerWithName(HttpHeaders.CONTENT_TYPE).description("content type (application/hal+json;charset=UTF-8)")
+                        ),
+                        responseFields(
+                                fieldWithPath("page.size").description("printed events number in a page"),
+                                fieldWithPath("page.totalElements").description("total event count"),
+                                fieldWithPath("page.totalPages").description("total page count"),
+                                fieldWithPath("page.number").description("current page number (start with 0)"),
+                                subsectionWithPath("_links").description("links in event (first, prev, self, next, last, profile)")
+                        ).and(this.getEventFields))
+                );
+
+    }
+
+    private void generateEvent(int index) {
+        Event event = Event.eventBuilder()
+                .name("testEvent" + index)
+                .description("test event_" + index)
+                .build();
+
+        this.eventRepository.save(event);
+    }
+
+
 }
