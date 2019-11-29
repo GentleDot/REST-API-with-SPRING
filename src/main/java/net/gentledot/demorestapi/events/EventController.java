@@ -61,9 +61,9 @@ public class EventController {
                 .build();
        */
         Event event = this.modelMapper.map(eventDto, Event.class);
-        event = eventService.updateEvent(event);
+        event = eventService.updateEventEntities(event);
 
-        Event newEvent = eventService.setNewEvent(event);
+        Event newEvent = eventService.createNewEvent(event);
 
         WebMvcLinkBuilder eventLinkUrl = linkTo(EventController.class);
         WebMvcLinkBuilder selfLinkUrl = linkTo(EventController.class).slash(newEvent.getId());
@@ -98,6 +98,39 @@ public class EventController {
         Event event = optionalEvent.get();
         EventEntityModel eventEntityModel = new EventEntityModel(event);
         eventEntityModel.add(new Link("/docs/index.html#resources-events-get").withRel("profile"));
+        return ResponseEntity.ok(eventEntityModel);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity updateEvent(@PathVariable Integer id, @RequestBody @Valid EventDto eventDto, Errors errors) {
+        Optional<Event> optionalEvent = this.eventService.getEvent(id);
+
+        if (optionalEvent.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        } else if (errors.hasErrors()) {
+            return badRequest(errors);
+        }
+
+        eventValidator.validate(eventDto, errors);
+        if (errors.hasErrors()) {
+            return badRequest(errors);
+        }
+
+        Event targetEvent = optionalEvent.get();
+        /* 강의와 다른 부분은 주석 처리 : 20191130_gentledot */
+//        Event eventData = this.modelMapper.map(eventDto, Event.class);
+//        eventData = eventService.updateEventEntities(eventData);
+
+        this.modelMapper.map(eventDto, targetEvent);
+        Event eventData = eventService.updateEventEntities(targetEvent);
+
+        /* 강의와 다른 부분은 주석 처리 : 20191130_gentledot */
+//        Event updatedEvent = eventService.updateEvent_Deprecated(targetEvent, eventData);
+        Event updatedEvent = eventService.updateEvent(targetEvent);
+
+        EventEntityModel eventEntityModel = new EventEntityModel(updatedEvent);
+        eventEntityModel.add(new Link("/docs/index.html#resources-events-update").withRel("profile"));
+
         return ResponseEntity.ok(eventEntityModel);
     }
 

@@ -268,7 +268,7 @@ operation::create-event[snippets='curl-request,request-headers,request-fields,ht
 [[resources-events-get]]
 === 이벤트 조회(Get Event)
 
-`Get` 요청을 사용해서 기존 이벤트 하나를 조회할 수 있다.
+`GET` 요청을 사용해서 기존 이벤트 하나를 조회할 수 있다.
 
 operation::get-event[snippets='curl-request,http-response,response-headers,response-fields,links']
 
@@ -277,4 +277,4 @@ operation::get-event[snippets='curl-request,http-response,response-headers,respo
 
 `PUT` 요청을 사용해서 기존 이벤트를 수정할 수 있다.
 
-operation::update-event[snippets='request-fields,curl-request,http-response,links']
+operation::update-event[snippets='curl-request,request-headers,request-fields,http-response,response-headers,response-fields,links']

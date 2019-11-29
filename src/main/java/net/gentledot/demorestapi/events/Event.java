@@ -1,6 +1,7 @@
 package net.gentledot.demorestapi.events;
 
 import lombok.*;
+import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.SortNatural;
 
 import javax.persistence.*;
@@ -14,6 +15,7 @@ import java.time.LocalDateTime;
 @Setter // (setXXX 생성)
 @EqualsAndHashCode(of = "id")   // ??
 @Entity // JPA 설정
+@DynamicUpdate
 public class Event {
 
     @Id // ??

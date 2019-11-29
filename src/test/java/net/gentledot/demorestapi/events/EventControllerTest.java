@@ -27,8 +27,7 @@ import static org.springframework.restdocs.hypermedia.HypermediaDocumentation.li
 import static org.springframework.restdocs.hypermedia.HypermediaDocumentation.links;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.payload.PayloadDocumentation.*;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -61,15 +60,15 @@ public class EventControllerTest {
 //    EventRepository eventRepository;
 
     private FieldDescriptor[] eventFields = new FieldDescriptor[]{
-            fieldWithPath("name").description("name of new event"),
-            fieldWithPath("description").description("description of new event"),
+            fieldWithPath("name").description("name of event"),
+            fieldWithPath("description").description("description of event"),
             fieldWithPath("beginEnrollmentDateTime").description("date time of beginEnrollmentDateTime"),
             fieldWithPath("closeEnrollmentDateTime").description("date time of closeEnrollmentDateTime"),
             fieldWithPath("beginEventDateTime").description("date time of beginEventDateTime"),
             fieldWithPath("endEventDateTime").description("date time of endEventDateTime"),
-            fieldWithPath("location").description("location of new event"),
-            fieldWithPath("basePrice").description("basePrice of new event"),
-            fieldWithPath("maxPrice").description("maxPrice of new event"),
+            fieldWithPath("location").description("location of event"),
+            fieldWithPath("basePrice").description("basePrice of event"),
+            fieldWithPath("maxPrice").description("maxPrice of event"),
             fieldWithPath("limitOfEnrollment").description("limit Of enrollment")
     };
 
@@ -348,10 +347,157 @@ public class EventControllerTest {
                 .andExpect(status().isNotFound());
     }
 
+    @Test
+    @TestDescription("기존 생성 되어있는 이벤트 수정하기")
+    public void updateEvent() throws Exception {
+        // given
+        this.generateEvent(107);
+        Event event = this.generateEvent(108);
+        EventDto eventDto = EventDto.builder()
+                .name("modified event")
+                .description(event.getDescription())
+                .beginEnrollmentDateTime(LocalDateTime.of(2019, 12, 2, 9, 0))
+                .closeEnrollmentDateTime(LocalDateTime.of(2019, 12, 6, 23, 59))
+                .beginEventDateTime(LocalDateTime.of(2019, 12, 16, 10, 0))
+                .endEventDateTime(LocalDateTime.of(2020, 1, 3, 18, 30))
+                .basePrice(85000)
+                .maxPrice(1250000)
+                .limitOfEnrollment(60)
+                .location("")
+                .build();
+
+        // when
+        ResultActions actions = this.mockMvc.perform(put("/api/events/{id}", event.getId())
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(this.objectMapper.writeValueAsString(eventDto)));
+
+        // then
+        this.mockMvc.perform(put("/api/events/{id}", event.getId())
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(this.objectMapper.writeValueAsString(eventDto)))
+                .andExpect(status().isOk())
+                .andDo(print())
+                .andExpect(jsonPath("id").exists())
+                .andExpect(jsonPath("name").exists())
+                .andExpect(jsonPath("_links.self").exists())
+                .andExpect(jsonPath("_links.profile").exists())
+                .andDo(document("update-event",
+                        links(
+                                linkWithRel("self").description("link to self"),
+                                linkWithRel("profile").description("link to profile (how to update event)")
+                        ),
+                        requestHeaders(
+                                headerWithName(HttpHeaders.CONTENT_TYPE).description("content header")
+                        ),
+                        requestFields(
+                                this.eventFields
+                        ),
+                        responseHeaders(
+                                headerWithName(HttpHeaders.CONTENT_TYPE).description("content type (application/hal+json;charset=UTF-8)")
+                        ),
+                        responseFields(
+                                fieldWithPath("id").description("identifier of new event"),
+                                fieldWithPath("offline").description("information about if this event is offline event or not"),
+                                fieldWithPath("free").description("information about if this event is free or not"),
+                                fieldWithPath("eventStatus").description("event status"),
+                                subsectionWithPath("_links").description("links in event (self, profile)")
+                        ).and(this.eventFields))
+                );
+    }
+
+
+    @Test
+    @TestDescription("없는 이벤트 수정하기 (404 not found)")
+    public void updateNullEvent() throws Exception {
+        // given
+        this.generateEvent(100);
+        EventDto eventDto = EventDto.builder()
+                .name("modified event")
+                .description("Changed online event")
+                .beginEnrollmentDateTime(LocalDateTime.of(2019, 12, 2, 9, 0))
+                .closeEnrollmentDateTime(LocalDateTime.of(2019, 12, 6, 23, 59))
+                .beginEventDateTime(LocalDateTime.of(2019, 12, 16, 10, 0))
+                .endEventDateTime(LocalDateTime.of(2020, 1, 3, 18, 30))
+                .basePrice(85000)
+                .maxPrice(1250000)
+                .limitOfEnrollment(60)
+                .location("")
+                .build();
+
+        // when
+        ResultActions actions = this.mockMvc.perform(put("/api/events/000000")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(this.objectMapper.writeValueAsString(eventDto)));
+
+        // then
+        this.mockMvc.perform(put("/api/events/000000")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(this.objectMapper.writeValueAsString(eventDto)))
+                .andDo(print())
+                .andExpect(status().isNotFound());
+    }
+
+    @Test
+    @TestDescription("빈 수정 데이터가 들어올 때 에러를 발생하는 테스트 (400 error)")
+    public void updateEvent_badRequest_emptyInput() throws Exception {
+        // given
+        Event event = this.generateEvent(108);
+        EventDto eventDto = EventDto.builder().build();
+
+        // when
+        ResultActions actions = this.mockMvc.perform(put("/api/events/{id}", event.getId())
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(this.objectMapper.writeValueAsString(eventDto)));
+
+        // then
+        this.mockMvc.perform(put("/api/events/{id}", event.getId())
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(this.objectMapper.writeValueAsString(eventDto)))
+                .andDo(print())
+                .andExpect(status().isBadRequest());
+    }
+
+    @Test
+    @TestDescription("수정값 중에 받기로 한 값 이외의 값이 들어올 때 에러가 발생하는 테스트 (400 error)")
+    public void updateEvent_badRequest_inputNotDtoData() throws Exception {
+        // given
+        Event event = this.generateEvent(108);
+        EventDto eventDto = EventDto.builder()
+                .name("testWrongEvent_update")
+                .description("비정상적인 값 처리 테스트")
+                .beginEnrollmentDateTime(LocalDateTime.of(2019, 11, 26, 14, 21))
+                .closeEnrollmentDateTime(LocalDateTime.of(2019, 11, 25, 14, 21))
+                .beginEventDateTime(LocalDateTime.of(2019, 11, 24, 14, 21))
+                .endEventDateTime(LocalDateTime.of(2019, 11, 23, 14, 21))
+                .basePrice(999999)
+                .maxPrice(100)
+                .limitOfEnrollment(1)
+                .location("강남역 5번 출구")
+                .build();
+
+        // when
+        ResultActions actions = this.mockMvc.perform(put("/api/events/{id}", event.getId())
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(this.objectMapper.writeValueAsString(eventDto)));
+
+        // then
+        this.mockMvc.perform(put("/api/events/{id}", event.getId())
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(this.objectMapper.writeValueAsString(eventDto)))
+                .andDo(print())
+                .andExpect(status().isBadRequest())
+                // errors 가 JSON array 로 생성되면서 @unwrapped 가 동작하지 않고 content에 wrapping 되기 때문에 $[0] -> content[0] 로 수정되었음.
+                .andExpect(jsonPath("content[0].objectName").exists())
+                .andExpect(jsonPath("content[0].defaultMessage").exists())
+                .andExpect(jsonPath("content[0].code").exists())
+                .andExpect(jsonPath("_links.index").exists());
+    }
+
     private Event generateEvent(int index) {
         Event event = Event.eventBuilder()
                 .name("testEvent" + index)
                 .description("test event_" + index)
+                .basePrice(100)
                 .build();
 
         return this.eventRepository.save(event);

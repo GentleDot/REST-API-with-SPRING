@@ -1,13 +1,9 @@
 package net.gentledot.demorestapi.events;
 
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.jpa.domain.JpaSort;
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
 import java.util.Optional;
 
 @Service(value = "EventService")
@@ -19,16 +15,23 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public Event setNewEvent(Event event) {
+    public Event createNewEvent(Event event) {
         return this.eventRepository.save(event);
     }
 
     @Override
-    public Event updateEvent(Event event) {
-        event.updateFree();
-        event.updateOffline();
-        return event;
+    public Event updateEvent(Event targetEvent) {
+        return this.eventRepository.save(targetEvent);
     }
+
+    /* 강의와 다른 부분은 주석 처리 : 20191130_gentledot */
+    /*
+    @Override
+    public Event updateEvent_Deprecated(Event targetEvent, Event eventData) {
+        eventData.setId(targetEvent.getId());
+        return this.eventRepository.save(eventData);
+    }
+    */
 
     @Override
     public Optional<Event> getEvent(Integer id) {
@@ -38,5 +41,12 @@ public class EventServiceImpl implements EventService {
     @Override
     public Page<Event> getEventsWithPaging(Pageable pageable) {
         return this.eventRepository.findAll(pageable);
+    }
+
+    @Override
+    public Event updateEventEntities(Event event) {
+        event.updateFree();
+        event.updateOffline();
+        return event;
     }
 }
