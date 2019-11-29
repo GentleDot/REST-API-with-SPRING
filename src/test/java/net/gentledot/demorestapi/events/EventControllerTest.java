@@ -1,23 +1,14 @@
 package net.gentledot.demorestapi.events;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import net.gentledot.demorestapi.common.RestDocsConfiguration;
+import net.gentledot.demorestapi.common.BaseControllerTest;
 import net.gentledot.demorestapi.common.TestDescription;
 import org.hamcrest.Matchers;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.annotation.Import;
 import org.springframework.hateoas.MediaTypes;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.restdocs.payload.FieldDescriptor;
-import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 
 import java.time.LocalDateTime;
@@ -31,24 +22,9 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-@RunWith(SpringRunner.class)
-//@WebMvcTest
-@SpringBootTest
-@AutoConfigureMockMvc
-@AutoConfigureRestDocs
-@Import(RestDocsConfiguration.class)
-@ActiveProfiles("test")
-public class EventControllerTest {
+public class EventControllerTest extends BaseControllerTest {
     // charset = UTF-8 로 명시된 상수는 deprecated
     private static String CONTENT_TYPE_HAL_JSON = MediaTypes.HAL_JSON_VALUE + ";charset=UTF-8";
-
-    // @SpringBootTest 에서 MockMvc 클래스를 사용하려면 @AutoConfigureMockMvc를 사용한다.
-    // WebEnvironment webEnvironment() default WebEnvironment.MOCK; >> Mocking을 하는 DispatcherServlet를 생성
-    @Autowired
-    MockMvc mockMvc;
-
-    @Autowired
-    ObjectMapper objectMapper;
 
     @Autowired
     EventRepository eventRepository;
