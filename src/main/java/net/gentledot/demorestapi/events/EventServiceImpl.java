@@ -8,6 +8,7 @@ import org.springframework.data.jpa.domain.JpaSort;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
+import java.util.Optional;
 
 @Service(value = "EventService")
 public class EventServiceImpl implements EventService {
@@ -27,6 +28,11 @@ public class EventServiceImpl implements EventService {
         event.updateFree();
         event.updateOffline();
         return event;
+    }
+
+    @Override
+    public Optional<Event> getEvent(Integer id) {
+        return this.eventRepository.findById(id);
     }
 
     @Override

@@ -256,7 +256,7 @@ operation::tag-update-example[snippets='request-fields,curl-request,http-respons
 
 `GET` 요청을 사용하여 서비스의 모든 이벤트를 조회할 수 있다.
 
-operation::get-events[snippets='response-fields,curl-request,http-response,links']
+operation::get-events[snippets='curl-request,http-response,response-headers,response-fields,links']
 
 [[resources-events-create]]
 === 이벤트 생성(Create Event)
@@ -270,7 +270,7 @@ operation::create-event[snippets='curl-request,request-headers,request-fields,ht
 
 `Get` 요청을 사용해서 기존 이벤트 하나를 조회할 수 있다.
 
-operation::get-event[snippets='request-fields,curl-request,http-response,links']
+operation::get-event[snippets='curl-request,http-response,response-headers,response-fields,links']
 
 [[resources-events-update]]
 === 이벤트 수정(Update Event)

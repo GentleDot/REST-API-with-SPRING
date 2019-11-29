@@ -18,6 +18,7 @@ import org.springframework.restdocs.payload.FieldDescriptor;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.ResultActions;
 
 import java.time.LocalDateTime;
 
@@ -59,7 +60,7 @@ public class EventControllerTest {
 //    @MockBean
 //    EventRepository eventRepository;
 
-    private FieldDescriptor[] postEventFields = new FieldDescriptor[]{
+    private FieldDescriptor[] eventFields = new FieldDescriptor[]{
             fieldWithPath("name").description("name of new event"),
             fieldWithPath("description").description("description of new event"),
             fieldWithPath("beginEnrollmentDateTime").description("date time of beginEnrollmentDateTime"),
@@ -72,7 +73,7 @@ public class EventControllerTest {
             fieldWithPath("limitOfEnrollment").description("limit Of enrollment")
     };
 
-    private FieldDescriptor[] getEventFields = new FieldDescriptor[]{
+    private FieldDescriptor[] getEventsFields = new FieldDescriptor[]{
             fieldWithPath("_embedded.eventList[].id").description("identifier of new event"),
             fieldWithPath("_embedded.eventList[].offline").description("information about if this event is offline event or not"),
             fieldWithPath("_embedded.eventList[].free").description("information about if this event is free or not"),
@@ -146,7 +147,7 @@ public class EventControllerTest {
                                 headerWithName(HttpHeaders.CONTENT_TYPE).description("content header")
                         ),
                         requestFields(
-                                this.postEventFields
+                                this.eventFields
                         ),
                         responseHeaders(
                                 headerWithName(HttpHeaders.LOCATION).description("location header (생성된 이벤트 조회 url)"),
@@ -158,7 +159,7 @@ public class EventControllerTest {
                                 fieldWithPath("free").description("information about if this event is free or not"),
                                 fieldWithPath("eventStatus").description("event status"),
                                 subsectionWithPath("_links").description("links in event (self, query-events, update-event)")
-                        ).and(this.postEventFields))
+                        ).and(this.eventFields))
                 );
     }
 
@@ -248,8 +249,6 @@ public class EventControllerTest {
     @TestDescription("30개의 이벤트를 10개씩 출력하여 2번째 페이지 조회하기")
     public void getEvents_with_paging() throws Exception {
         //  given
-        //  when
-
         // Lambda
 //        IntStream.range(0, 30).forEach(i -> {
 //            this.generateEvent(i);
@@ -261,6 +260,12 @@ public class EventControllerTest {
             this.generateEvent(i);
         }
 
+        // when
+        ResultActions perform = this.mockMvc.perform(get("/api/events")
+                .param("page", "1")
+                .param("size", "10")
+                .param("sort", "name,DESC"));
+
         // then
         this.mockMvc.perform(get("/api/events")
                 .param("page", "1")
@@ -271,7 +276,7 @@ public class EventControllerTest {
                 .andExpect(jsonPath("page").exists())
                 .andExpect(jsonPath("_links.self").exists())
                 .andExpect(jsonPath("_links.profile").exists())
-                .andDo(document("query-event",
+                .andDo(document("get-events",
                         links(
                                 linkWithRel("first").description("link to first event page"),
                                 linkWithRel("prev").description("link to previous event page"),
@@ -288,20 +293,68 @@ public class EventControllerTest {
                                 fieldWithPath("page.totalElements").description("total event count"),
                                 fieldWithPath("page.totalPages").description("total page count"),
                                 fieldWithPath("page.number").description("current page number (start with 0)"),
-                                subsectionWithPath("_links").description("links in event (first, prev, self, next, last, profile)")
-                        ).and(this.getEventFields))
+                                subsectionWithPath("_links").description("links in getEvents (first, prev, self, next, last, profile)")
+                        ).and(this.getEventsFields))
                 );
 
     }
 
-    private void generateEvent(int index) {
+    @Test
+    @TestDescription("기존 생성 되어있는 이벤트 조회하기")
+    public void getEvent() throws Exception {
+        // given
+        Event event = this.generateEvent(100);
+
+        // when
+        ResultActions perform = this.mockMvc.perform(get("/api/events/{id}", event.getId()));
+
+        // then
+        this.mockMvc.perform(get("/api/events/{id}", event.getId()))
+                .andExpect(status().isOk())
+                .andDo(print())
+                .andExpect(jsonPath("id").exists())
+                .andExpect(jsonPath("name").exists())
+                .andExpect(jsonPath("_links.self").exists())
+                .andExpect(jsonPath("_links.profile").exists())
+                .andDo(document("get-event",
+                        links(
+                                linkWithRel("self").description("link to self"),
+                                linkWithRel("profile").description("link to profile (how to get event)")
+                        ),
+                        responseHeaders(
+                                headerWithName(HttpHeaders.CONTENT_TYPE).description("content type (application/hal+json;charset=UTF-8)")
+                        ),
+                        responseFields(
+                                fieldWithPath("id").description("identifier of new event"),
+                                fieldWithPath("offline").description("information about if this event is offline event or not"),
+                                fieldWithPath("free").description("information about if this event is free or not"),
+                                fieldWithPath("eventStatus").description("event status"),
+                                subsectionWithPath("_links").description("links in event (self, profile)")
+                        ).and(this.eventFields))
+                );
+    }
+
+
+    @Test
+    @TestDescription("없는 이벤트 조회하기 (404 not found)")
+    public void getNullEvent() throws Exception {
+        // given
+
+        // when
+        ResultActions perform = this.mockMvc.perform(get("/api/events/000000"));
+
+        // then
+        this.mockMvc.perform(get("/api/events/000000"))
+                .andExpect(status().isNotFound());
+    }
+
+    private Event generateEvent(int index) {
         Event event = Event.eventBuilder()
                 .name("testEvent" + index)
                 .description("test event_" + index)
                 .build();
 
-        this.eventRepository.save(event);
+        return this.eventRepository.save(event);
     }
-
 
 }
