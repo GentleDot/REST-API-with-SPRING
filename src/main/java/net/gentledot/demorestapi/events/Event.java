@@ -1,6 +1,7 @@
 package net.gentledot.demorestapi.events;
 
 import lombok.*;
+import net.gentledot.demorestapi.accounts.Account;
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.SortNatural;
 
@@ -37,6 +38,8 @@ public class Event {
     // enum은 default가 EnumType.ORDINAL (순서에 따라 0, 1, n)
     @Enumerated(EnumType.STRING)
     private EventStatus eventStatus = EventStatus.DRAFT;
+    @ManyToOne
+    private Account manager;
 
     public void updateFree() {
         if (this.basePrice == 0 && this.maxPrice == 0){

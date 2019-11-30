@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d91a007d-707d-443a-84aa-0702028bf42f" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/test/java/net/gentledot/demorestapi/common/BaseControllerTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/net/gentledot/demorestapi/events/EventControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/net/gentledot/demorestapi/events/EventControllerTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/net/gentledot/demorestapi/index/IndexControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/net/gentledot/demorestapi/index/IndexControllerTest.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -35,6 +32,7 @@
       <list>
         <option value="Interface" />
         <option value="Class" />
+        <option value="Enum" />
       </list>
     </option>
   </component>
@@ -75,6 +73,9 @@
     <property name="settings.editor.splitter.proportion" value="0.2319842" />
   </component>
   <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="net.gentledot.demorestapi.accounts" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\workspace\study\spring-rest-api\src\test\resources" />
       <recent name="$PROJECT_DIR$/.." />
@@ -230,7 +231,7 @@
       <workItem from="1574484703294" duration="5701000" />
       <workItem from="1574827852477" duration="2405000" />
       <workItem from="1574830418959" duration="2102000" />
-      <workItem from="1574835947586" duration="62447000" />
+      <workItem from="1574835947586" duration="64633000" />
     </task>
     <servers />
   </component>
