@@ -2,7 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d91a007d-707d-443a-84aa-0702028bf42f" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/net/gentledot/demorestapi/accounts/AccountRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/net/gentledot/demorestapi/accounts/AccountService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/net/gentledot/demorestapi/accounts/AccountServiceTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/learn-rest-api.iml" beforeDir="false" afterPath="$PROJECT_DIR$/learn-rest-api.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/gentledot/demorestapi/events/Event$EventBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/net/gentledot/demorestapi/events/Event$EventBuilder.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/gentledot/demorestapi/events/Event.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/net/gentledot/demorestapi/events/Event.class" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -30,9 +37,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Interface" />
-        <option value="Class" />
         <option value="Enum" />
+        <option value="Class" />
+        <option value="Interface" />
       </list>
     </option>
   </component>
@@ -69,12 +76,13 @@
     <property name="project.structure.last.edited" value="Global Libraries" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.53333336" />
-    <property name="settings.editor.selected.configurable" value="MTConfigurable" />
+    <property name="settings.editor.selected.configurable" value="preferences.editor" />
     <property name="settings.editor.splitter.proportion" value="0.2319842" />
   </component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="net.gentledot.demorestapi.accounts" />
+      <recent name="net.gentledot.demorestapi.account" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\workspace\study\spring-rest-api\src\test\resources" />
@@ -93,7 +101,39 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.net.gentledot.demorestapi in learn-rest-api">
+  <component name="RunManager" selected="JUnit.AccountServiceTest.failedFindByUserName">
+    <configuration name="AccountServiceTest.failedFindByUserName" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="learn-rest-api" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="net.gentledot.demorestapi.accounts.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="net.gentledot.demorestapi.accounts" />
+      <option name="MAIN_CLASS_NAME" value="net.gentledot.demorestapi.accounts.AccountServiceTest" />
+      <option name="METHOD_NAME" value="failedFindByUserName" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="AccountServiceTest.findByUserName" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="learn-rest-api" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="net.gentledot.demorestapi.accounts.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="net.gentledot.demorestapi.accounts" />
+      <option name="MAIN_CLASS_NAME" value="net.gentledot.demorestapi.accounts.AccountServiceTest" />
+      <option name="METHOD_NAME" value="findByUserName" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="EventControllerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="learn-rest-api" />
       <extension name="coverage">
@@ -142,38 +182,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="EventControllerTest.updateEvent_badRequest_inputNotDtoData" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="learn-rest-api" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="net.gentledot.demorestapi.events.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="net.gentledot.demorestapi.events" />
-      <option name="MAIN_CLASS_NAME" value="net.gentledot.demorestapi.events.EventControllerTest" />
-      <option name="METHOD_NAME" value="updateEvent_badRequest_inputNotDtoData" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="EventControllerTest.updateNullEvent" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="learn-rest-api" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="net.gentledot.demorestapi.events.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="net.gentledot.demorestapi.events" />
-      <option name="MAIN_CLASS_NAME" value="net.gentledot.demorestapi.events.EventControllerTest" />
-      <option name="METHOD_NAME" value="updateNullEvent" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="net.gentledot.demorestapi in learn-rest-api" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="learn-rest-api" />
       <extension name="coverage">
@@ -198,18 +206,18 @@
     <list>
       <item itemvalue="JUnit.EventControllerTest (1)" />
       <item itemvalue="Spring Boot.DemoRestApiApplication" />
-      <item itemvalue="JUnit.EventControllerTest.updateNullEvent" />
-      <item itemvalue="JUnit.EventControllerTest.updateEvent_badRequest_inputNotDtoData" />
       <item itemvalue="JUnit.EventControllerTest.updateEvent" />
       <item itemvalue="JUnit.net.gentledot.demorestapi in learn-rest-api" />
+      <item itemvalue="JUnit.AccountServiceTest.findByUserName" />
+      <item itemvalue="JUnit.AccountServiceTest.failedFindByUserName" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.AccountServiceTest.failedFindByUserName" />
+        <item itemvalue="JUnit.AccountServiceTest.findByUserName" />
         <item itemvalue="JUnit.net.gentledot.demorestapi in learn-rest-api" />
         <item itemvalue="JUnit.EventControllerTest (1)" />
         <item itemvalue="JUnit.EventControllerTest.updateEvent" />
-        <item itemvalue="JUnit.EventControllerTest.updateNullEvent" />
-        <item itemvalue="JUnit.EventControllerTest.updateEvent_badRequest_inputNotDtoData" />
       </list>
     </recent_temporary>
   </component>
@@ -231,7 +239,7 @@
       <workItem from="1574484703294" duration="5701000" />
       <workItem from="1574827852477" duration="2405000" />
       <workItem from="1574830418959" duration="2102000" />
-      <workItem from="1574835947586" duration="64633000" />
+      <workItem from="1574835947586" duration="71112000" />
     </task>
     <servers />
   </component>
