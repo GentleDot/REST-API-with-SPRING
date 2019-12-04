@@ -47,7 +47,6 @@
             <version>2.2.1.RELEASE</version>
         </dependency>
 
-
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
