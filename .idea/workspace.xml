@@ -2,13 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d91a007d-707d-443a-84aa-0702028bf42f" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/learn-rest-api.iml" beforeDir="false" afterPath="$PROJECT_DIR$/learn-rest-api.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/gentledot/demorestapi/DemoRestApiApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/gentledot/demorestapi/DemoRestApiApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/gentledot/demorestapi/accounts/AccountRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/gentledot/demorestapi/accounts/AccountRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/gentledot/demorestapi/accounts/AccountService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/gentledot/demorestapi/accounts/AccountService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/gentledot/demorestapi/configs/AppConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/gentledot/demorestapi/configs/AppConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/gentledot/demorestapi/configs/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/gentledot/demorestapi/configs/SecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/net/gentledot/demorestapi/accounts/AccountServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/net/gentledot/demorestapi/accounts/AccountServiceTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -205,8 +203,8 @@
     <recent_temporary>
       <list>
         <item itemvalue="JUnit.EventControllerTest" />
-        <item itemvalue="JUnit.AccountServiceTest.failedFindByUserName" />
         <item itemvalue="JUnit.AccountServiceTest.findByUserName" />
+        <item itemvalue="JUnit.AccountServiceTest.failedFindByUserName" />
         <item itemvalue="JUnit.net.gentledot.demorestapi in learn-rest-api" />
         <item itemvalue="JUnit.EventControllerTest.updateEvent" />
       </list>
@@ -247,7 +245,7 @@
       <workItem from="1575338793168" duration="262000" />
       <workItem from="1575339085684" duration="5788000" />
       <workItem from="1575383935670" duration="117000" />
-      <workItem from="1575425963676" duration="4064000" />
+      <workItem from="1575425963676" duration="7271000" />
     </task>
     <servers />
   </component>
@@ -285,46 +283,46 @@
     </option>
   </component>
   <component name="WindowStateProjectService">
-    <state x="1146" y="231" key="#com.intellij.ide.util.MemberChooser" timestamp="1575436973248">
+    <state x="1146" y="231" key="#com.intellij.ide.util.MemberChooser" timestamp="1575438729139">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state x="1146" y="231" key="#com.intellij.ide.util.MemberChooser/-1920.0.1920.1050/0.0.1920.1050/-1930.1080.1097.617@0.0.1920.1050" timestamp="1575436973248" />
+    <state x="1146" y="231" key="#com.intellij.ide.util.MemberChooser/-1920.0.1920.1050/0.0.1920.1050/-1930.1080.1097.617@0.0.1920.1050" timestamp="1575438729139" />
     <state x="640" y="250" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog" timestamp="1575338811030">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state x="640" y="250" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/-1920.0.1920.1050/0.0.1920.1050/-1930.1080.1097.617@0.0.1920.1050" timestamp="1575338811030" />
-    <state width="1112" height="418" key="GridCell.Tab.0.bottom" timestamp="1575437546609">
+    <state width="1112" height="418" key="GridCell.Tab.0.bottom" timestamp="1575443579105">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state width="1112" height="418" key="GridCell.Tab.0.bottom/-1920.0.1920.1050/0.0.1920.1050/-1930.1080.1097.617@0.0.1920.1050" timestamp="1575437546609" />
-    <state width="1112" height="418" key="GridCell.Tab.0.center" timestamp="1575437546609">
+    <state width="1112" height="418" key="GridCell.Tab.0.bottom/-1920.0.1920.1050/0.0.1920.1050/-1930.1080.1097.617@0.0.1920.1050" timestamp="1575443579105" />
+    <state width="1112" height="418" key="GridCell.Tab.0.center" timestamp="1575443579105">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state width="1112" height="418" key="GridCell.Tab.0.center/-1920.0.1920.1050/0.0.1920.1050/-1930.1080.1097.617@0.0.1920.1050" timestamp="1575437546609" />
-    <state width="1112" height="418" key="GridCell.Tab.0.left" timestamp="1575437546609">
+    <state width="1112" height="418" key="GridCell.Tab.0.center/-1920.0.1920.1050/0.0.1920.1050/-1930.1080.1097.617@0.0.1920.1050" timestamp="1575443579105" />
+    <state width="1112" height="418" key="GridCell.Tab.0.left" timestamp="1575443579105">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state width="1112" height="418" key="GridCell.Tab.0.left/-1920.0.1920.1050/0.0.1920.1050/-1930.1080.1097.617@0.0.1920.1050" timestamp="1575437546609" />
-    <state width="1112" height="418" key="GridCell.Tab.0.right" timestamp="1575437546609">
+    <state width="1112" height="418" key="GridCell.Tab.0.left/-1920.0.1920.1050/0.0.1920.1050/-1930.1080.1097.617@0.0.1920.1050" timestamp="1575443579105" />
+    <state width="1112" height="418" key="GridCell.Tab.0.right" timestamp="1575443579105">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state width="1112" height="418" key="GridCell.Tab.0.right/-1920.0.1920.1050/0.0.1920.1050/-1930.1080.1097.617@0.0.1920.1050" timestamp="1575437546609" />
-    <state width="1112" height="418" key="GridCell.Tab.1.bottom" timestamp="1575437546609">
+    <state width="1112" height="418" key="GridCell.Tab.0.right/-1920.0.1920.1050/0.0.1920.1050/-1930.1080.1097.617@0.0.1920.1050" timestamp="1575443579105" />
+    <state width="1112" height="418" key="GridCell.Tab.1.bottom" timestamp="1575443579106">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state width="1112" height="418" key="GridCell.Tab.1.bottom/-1920.0.1920.1050/0.0.1920.1050/-1930.1080.1097.617@0.0.1920.1050" timestamp="1575437546609" />
-    <state width="1112" height="418" key="GridCell.Tab.1.center" timestamp="1575437546609">
+    <state width="1112" height="418" key="GridCell.Tab.1.bottom/-1920.0.1920.1050/0.0.1920.1050/-1930.1080.1097.617@0.0.1920.1050" timestamp="1575443579106" />
+    <state width="1112" height="418" key="GridCell.Tab.1.center" timestamp="1575443579105">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state width="1112" height="418" key="GridCell.Tab.1.center/-1920.0.1920.1050/0.0.1920.1050/-1930.1080.1097.617@0.0.1920.1050" timestamp="1575437546609" />
-    <state width="1112" height="418" key="GridCell.Tab.1.left" timestamp="1575437546609">
+    <state width="1112" height="418" key="GridCell.Tab.1.center/-1920.0.1920.1050/0.0.1920.1050/-1930.1080.1097.617@0.0.1920.1050" timestamp="1575443579105" />
+    <state width="1112" height="418" key="GridCell.Tab.1.left" timestamp="1575443579105">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state width="1112" height="418" key="GridCell.Tab.1.left/-1920.0.1920.1050/0.0.1920.1050/-1930.1080.1097.617@0.0.1920.1050" timestamp="1575437546609" />
-    <state width="1112" height="418" key="GridCell.Tab.1.right" timestamp="1575437546609">
+    <state width="1112" height="418" key="GridCell.Tab.1.left/-1920.0.1920.1050/0.0.1920.1050/-1930.1080.1097.617@0.0.1920.1050" timestamp="1575443579105" />
+    <state width="1112" height="418" key="GridCell.Tab.1.right" timestamp="1575443579105">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state width="1112" height="418" key="GridCell.Tab.1.right/-1920.0.1920.1050/0.0.1920.1050/-1930.1080.1097.617@0.0.1920.1050" timestamp="1575437546609" />
+    <state width="1112" height="418" key="GridCell.Tab.1.right/-1920.0.1920.1050/0.0.1920.1050/-1930.1080.1097.617@0.0.1920.1050" timestamp="1575443579105" />
     <state x="457" y="96" key="SettingsEditor" timestamp="1575339256704">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
