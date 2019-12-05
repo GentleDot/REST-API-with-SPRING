@@ -4,6 +4,7 @@ import net.gentledot.demorestapi.accounts.Account;
 import net.gentledot.demorestapi.accounts.AccountRepository;
 import net.gentledot.demorestapi.accounts.AccountRole;
 import net.gentledot.demorestapi.accounts.AccountService;
+import net.gentledot.demorestapi.common.AppProperties;
 import net.gentledot.demorestapi.common.BaseControllerTest;
 import net.gentledot.demorestapi.common.TestDescription;
 import org.hamcrest.Matchers;
@@ -42,6 +43,9 @@ public class EventControllerTest extends BaseControllerTest {
 
     @Autowired
     AccountRepository accountRepository;
+
+    @Autowired
+    AppProperties properties;
 
     // @WebMvcTest는 MVC 관련 Bean을 테스트배드에 올리는 것이므로 Transaction 처리 결과는 모두 Null
     // 따라서 Transaction에 대한 처리 방식이 어떻게 되는지 구현 필요 (Stubbing)
@@ -516,22 +520,17 @@ public class EventControllerTest extends BaseControllerTest {
     }
 
     private String getAccessToken() throws Exception {
-        String username = "gd@email.com";
-        String password = "gd";
         Account account = Account.builder()
-                .email(username)
-                .password(password)
+                .email(properties.getUsername())
+                .password(properties.getUserPassword())
                 .roles(Set.of(AccountRole.ADMIN, AccountRole.USER))
                 .build();
         this.accountService.saveAccount(account);
 
-        String clientId = "myApp";
-        String clientSecret = "pass";
-
         ResultActions perform = this.mockMvc.perform(post("/oauth/token")
-                .with(httpBasic(clientId, clientSecret))
-                .param("username", username)
-                .param("password", password)
+                .with(httpBasic(properties.getClientId(), properties.getClientSecret()))
+                .param("username", properties.getUsername())
+                .param("password", properties.getUserPassword())
                 .param("grant_type", "password"));
 
 //        MockHttpServletResponse response = perform.andReturn().getResponse();

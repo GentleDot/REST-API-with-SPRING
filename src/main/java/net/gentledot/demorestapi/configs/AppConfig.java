@@ -3,6 +3,7 @@ package net.gentledot.demorestapi.configs;
 import net.gentledot.demorestapi.accounts.Account;
 import net.gentledot.demorestapi.accounts.AccountRole;
 import net.gentledot.demorestapi.accounts.AccountService;
+import net.gentledot.demorestapi.common.AppProperties;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
@@ -35,14 +36,24 @@ public class AppConfig {
             @Autowired
             AccountService accountService;
 
+            @Autowired
+            AppProperties properties;
+
             @Override
             public void run(ApplicationArguments args) throws Exception {
-                Account gentledot = Account.builder()
-                        .email("gentledot@email.com")
-                        .password("gentledot")
+                Account admin = Account.builder()
+                        .email(properties.getAdminUsername())
+                        .password(properties.getAdminPassword())
                         .roles(Set.of(AccountRole.ADMIN, AccountRole.USER))
                         .build();
-                this.accountService.saveAccount(gentledot);
+                this.accountService.saveAccount(admin);
+
+                Account user = Account.builder()
+                        .email(properties.getUsername())
+                        .password(properties.getUserPassword())
+                        .roles(Set.of(AccountRole.ADMIN, AccountRole.USER))
+                        .build();
+                this.accountService.saveAccount(user);
             }
         };
     }
