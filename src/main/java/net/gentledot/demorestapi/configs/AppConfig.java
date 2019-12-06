@@ -54,6 +54,13 @@ public class AppConfig {
                         .roles(Set.of(AccountRole.ADMIN, AccountRole.USER))
                         .build();
                 this.accountService.saveAccount(user);
+
+                Account test = Account.builder()
+                        .email(properties.getTestUsername())
+                        .password(properties.getTestUserPassword())
+                        .roles(Set.of(AccountRole.ADMIN, AccountRole.USER))
+                        .build();
+                this.accountService.saveAccount(test);
             }
         };
     }

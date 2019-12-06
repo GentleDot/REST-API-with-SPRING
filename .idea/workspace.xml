@@ -2,8 +2,23 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d91a007d-707d-443a-84aa-0702028bf42f" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/net/gentledot/demorestapi/accounts/AccountAdapter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/net/gentledot/demorestapi/accounts/AccountSerializer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/net/gentledot/demorestapi/accounts/CurrentUser.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/gentledot/demorestapi/configs/ResourceServerConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/gentledot/demorestapi/configs/ResourceServerConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/asciidoc/index.adoc" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/asciidoc/index.adoc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/gentledot/demorestapi/accounts/AccountService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/gentledot/demorestapi/accounts/AccountService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/gentledot/demorestapi/common/AppProperties.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/gentledot/demorestapi/common/AppProperties.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/gentledot/demorestapi/configs/AppConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/gentledot/demorestapi/configs/AppConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/gentledot/demorestapi/configs/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/gentledot/demorestapi/configs/SecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/gentledot/demorestapi/events/Event.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/gentledot/demorestapi/events/Event.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/gentledot/demorestapi/events/EventController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/gentledot/demorestapi/events/EventController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/net/gentledot/demorestapi/DemoRestApiApplicationTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/net/gentledot/demorestapi/DemoRestApiApplicationTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/net/gentledot/demorestapi/events/EventControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/net/gentledot/demorestapi/events/EventControllerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/net/gentledot/demorestapi/index/IndexControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/net/gentledot/demorestapi/index/IndexControllerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/gentledot/demorestapi/events/Event$EventBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/net/gentledot/demorestapi/events/Event$EventBuilder.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/gentledot/demorestapi/events/Event.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/net/gentledot/demorestapi/events/Event.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,6 +51,7 @@
         <option value="Enum" />
         <option value="Interface" />
         <option value="JUnit4 Test Class" />
+        <option value="AnnotationType" />
         <option value="Class" />
       </list>
     </option>
@@ -87,63 +103,23 @@
     <key name="CreateTestDialog.RecentsKey">
       <recent name="net.gentledot.demorestapi.configs" />
     </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\workspace\study\spring-rest-api\src\test\resources" />
-      <recent name="$PROJECT_DIR$/.." />
-    </key>
-    <key name="CreateTestDialog.Recents.Supers">
-      <recent name="" />
-    </key>
     <key name="CreateClassDialog.RecentsKey">
       <recent name="net.gentledot.demorestapi.accounts" />
       <recent name="net.gentledot.demorestapi.account" />
     </key>
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\workspace\study\spring-rest-api\src\test\resources" />
+      <recent name="$PROJECT_DIR$/.." />
+    </key>
   </component>
-  <component name="RunManager" selected="JUnit.AuthServerConfigTest.getAuthToken">
-    <configuration name="AccountServiceTest.failedFindByUserName" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="JUnit.All in learn-rest-api">
+    <configuration name="All in learn-rest-api" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="learn-rest-api" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="net.gentledot.demorestapi.accounts.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="net.gentledot.demorestapi.accounts" />
-      <option name="MAIN_CLASS_NAME" value="net.gentledot.demorestapi.accounts.AccountServiceTest" />
-      <option name="METHOD_NAME" value="failedFindByUserName" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="AccountServiceTest.findByUserName" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="learn-rest-api" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="net.gentledot.demorestapi.accounts.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="net.gentledot.demorestapi.accounts" />
-      <option name="MAIN_CLASS_NAME" value="net.gentledot.demorestapi.accounts.AccountServiceTest" />
-      <option name="METHOD_NAME" value="findByUserName" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="AuthServerConfigTest.getAuthToken" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="learn-rest-api" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="net.gentledot.demorestapi.configs.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="net.gentledot.demorestapi.configs" />
-      <option name="MAIN_CLASS_NAME" value="net.gentledot.demorestapi.configs.AuthServerConfigTest" />
-      <option name="METHOD_NAME" value="getAuthToken" />
-      <option name="TEST_OBJECT" value="method" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="TEST_OBJECT" value="package" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -180,7 +156,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="EventControllerTest.createEvent" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="EventControllerTest.getEventsWithPaging" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="learn-rest-api" />
       <extension name="coverage">
         <pattern>
@@ -190,7 +166,39 @@
       </extension>
       <option name="PACKAGE_NAME" value="net.gentledot.demorestapi.events" />
       <option name="MAIN_CLASS_NAME" value="net.gentledot.demorestapi.events.EventControllerTest" />
-      <option name="METHOD_NAME" value="createEvent" />
+      <option name="METHOD_NAME" value="getEventsWithPaging" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="EventControllerTest.getEventsWithPagingAndAuthentication" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="learn-rest-api" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="net.gentledot.demorestapi.events.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="net.gentledot.demorestapi.events" />
+      <option name="MAIN_CLASS_NAME" value="net.gentledot.demorestapi.events.EventControllerTest" />
+      <option name="METHOD_NAME" value="getEventsWithPagingAndAuthentication" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="IndexControllerTest.index" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="learn-rest-api" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="net.gentledot.demorestapi.index.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="net.gentledot.demorestapi.index" />
+      <option name="MAIN_CLASS_NAME" value="net.gentledot.demorestapi.index.IndexControllerTest" />
+      <option name="METHOD_NAME" value="index" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -205,19 +213,19 @@
     </configuration>
     <list>
       <item itemvalue="JUnit.EventControllerTest" />
-      <item itemvalue="JUnit.AccountServiceTest.findByUserName" />
-      <item itemvalue="JUnit.AccountServiceTest.failedFindByUserName" />
-      <item itemvalue="JUnit.AuthServerConfigTest.getAuthToken" />
-      <item itemvalue="JUnit.EventControllerTest.createEvent" />
       <item itemvalue="Spring Boot.DemoRestApiApplication" />
+      <item itemvalue="JUnit.IndexControllerTest.index" />
+      <item itemvalue="JUnit.EventControllerTest.getEventsWithPagingAndAuthentication" />
+      <item itemvalue="JUnit.EventControllerTest.getEventsWithPaging" />
+      <item itemvalue="JUnit.All in learn-rest-api" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.AuthServerConfigTest.getAuthToken" />
+        <item itemvalue="JUnit.All in learn-rest-api" />
         <item itemvalue="JUnit.EventControllerTest" />
-        <item itemvalue="JUnit.EventControllerTest.createEvent" />
-        <item itemvalue="JUnit.AccountServiceTest.findByUserName" />
-        <item itemvalue="JUnit.AccountServiceTest.failedFindByUserName" />
+        <item itemvalue="JUnit.EventControllerTest.getEventsWithPagingAndAuthentication" />
+        <item itemvalue="JUnit.EventControllerTest.getEventsWithPaging" />
+        <item itemvalue="JUnit.IndexControllerTest.index" />
       </list>
     </recent_temporary>
   </component>
@@ -257,7 +265,8 @@
       <workItem from="1575339085684" duration="5788000" />
       <workItem from="1575383935670" duration="117000" />
       <workItem from="1575425963676" duration="20270000" />
-      <workItem from="1575550783293" duration="5127000" />
+      <workItem from="1575550783293" duration="8149000" />
+      <workItem from="1575643026990" duration="23921000" />
     </task>
     <servers />
   </component>
@@ -299,70 +308,78 @@
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state x="933" y="182" key="#Notifications/-1920.0.1920.1050/0.0.1920.1050/-1930.1080.1097.617@0.0.1920.1050" timestamp="1575556960324" />
-    <state x="1146" y="231" key="#com.intellij.ide.util.MemberChooser" timestamp="1575521867203">
+    <state x="1146" y="231" key="#com.intellij.ide.util.MemberChooser" timestamp="1575663213405">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state x="1146" y="231" key="#com.intellij.ide.util.MemberChooser/-1920.0.1920.1050/0.0.1920.1050/-1930.1080.1097.617@0.0.1920.1050" timestamp="1575521867203" />
+    <state x="1146" y="231" key="#com.intellij.ide.util.MemberChooser/-1920.0.1920.1050/0.0.1920.1050/-1930.1080.1097.617@0.0.1920.1050" timestamp="1575663213405" />
     <state x="640" y="250" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog" timestamp="1575338811030">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state x="640" y="250" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/-1920.0.1920.1050/0.0.1920.1050/-1930.1080.1097.617@0.0.1920.1050" timestamp="1575338811030" />
-    <state width="1112" height="418" key="GridCell.Tab.0.bottom" timestamp="1575556941081">
+    <state x="1127" y="374" width="449" height="303" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes" timestamp="1575664987540">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state width="1112" height="418" key="GridCell.Tab.0.bottom/-1920.0.1920.1050/0.0.1920.1050/-1930.1080.1097.617@0.0.1920.1050" timestamp="1575556941081" />
-    <state width="1112" height="418" key="GridCell.Tab.0.center" timestamp="1575556941081">
+    <state x="1127" y="374" width="449" height="303" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes/-1920.0.1920.1050/0.0.1920.1050/-1930.1080.1097.617@0.0.1920.1050" timestamp="1575664987540" />
+    <state width="1112" height="418" key="GridCell.Tab.0.bottom" timestamp="1575668126937">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state width="1112" height="418" key="GridCell.Tab.0.center/-1920.0.1920.1050/0.0.1920.1050/-1930.1080.1097.617@0.0.1920.1050" timestamp="1575556941081" />
-    <state width="1112" height="418" key="GridCell.Tab.0.left" timestamp="1575556941081">
+    <state width="1112" height="418" key="GridCell.Tab.0.bottom/-1920.0.1920.1050/0.0.1920.1050/-1930.1080.1097.617@0.0.1920.1050" timestamp="1575668126937" />
+    <state width="1112" height="418" key="GridCell.Tab.0.center" timestamp="1575668126936">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state width="1112" height="418" key="GridCell.Tab.0.left/-1920.0.1920.1050/0.0.1920.1050/-1930.1080.1097.617@0.0.1920.1050" timestamp="1575556941081" />
-    <state width="1112" height="418" key="GridCell.Tab.0.right" timestamp="1575556941081">
+    <state width="1112" height="418" key="GridCell.Tab.0.center/-1920.0.1920.1050/0.0.1920.1050/-1930.1080.1097.617@0.0.1920.1050" timestamp="1575668126936" />
+    <state width="1112" height="418" key="GridCell.Tab.0.left" timestamp="1575668126936">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state width="1112" height="418" key="GridCell.Tab.0.right/-1920.0.1920.1050/0.0.1920.1050/-1930.1080.1097.617@0.0.1920.1050" timestamp="1575556941081" />
-    <state width="1112" height="418" key="GridCell.Tab.1.bottom" timestamp="1575444066708">
+    <state width="1112" height="418" key="GridCell.Tab.0.left/-1920.0.1920.1050/0.0.1920.1050/-1930.1080.1097.617@0.0.1920.1050" timestamp="1575668126936" />
+    <state width="1112" height="418" key="GridCell.Tab.0.right" timestamp="1575668126937">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state width="1112" height="418" key="GridCell.Tab.1.bottom/-1920.0.1920.1050/0.0.1920.1050/-1930.1080.1097.617@0.0.1920.1050" timestamp="1575444066708" />
-    <state width="1112" height="418" key="GridCell.Tab.1.center" timestamp="1575444066708">
+    <state width="1112" height="418" key="GridCell.Tab.0.right/-1920.0.1920.1050/0.0.1920.1050/-1930.1080.1097.617@0.0.1920.1050" timestamp="1575668126937" />
+    <state width="1112" height="330" key="GridCell.Tab.1.bottom" timestamp="1575662817781">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state width="1112" height="418" key="GridCell.Tab.1.center/-1920.0.1920.1050/0.0.1920.1050/-1930.1080.1097.617@0.0.1920.1050" timestamp="1575444066708" />
-    <state width="1112" height="418" key="GridCell.Tab.1.left" timestamp="1575444066708">
+    <state width="1112" height="330" key="GridCell.Tab.1.bottom/-1920.0.1920.1050/0.0.1920.1050/-1930.1080.1097.617@0.0.1920.1050" timestamp="1575662817781" />
+    <state width="1112" height="330" key="GridCell.Tab.1.center" timestamp="1575662817781">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state width="1112" height="418" key="GridCell.Tab.1.left/-1920.0.1920.1050/0.0.1920.1050/-1930.1080.1097.617@0.0.1920.1050" timestamp="1575444066708" />
-    <state width="1112" height="418" key="GridCell.Tab.1.right" timestamp="1575444066708">
+    <state width="1112" height="330" key="GridCell.Tab.1.center/-1920.0.1920.1050/0.0.1920.1050/-1930.1080.1097.617@0.0.1920.1050" timestamp="1575662817781" />
+    <state width="1112" height="330" key="GridCell.Tab.1.left" timestamp="1575662817781">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state width="1112" height="418" key="GridCell.Tab.1.right/-1920.0.1920.1050/0.0.1920.1050/-1930.1080.1097.617@0.0.1920.1050" timestamp="1575444066708" />
+    <state width="1112" height="330" key="GridCell.Tab.1.left/-1920.0.1920.1050/0.0.1920.1050/-1930.1080.1097.617@0.0.1920.1050" timestamp="1575662817781" />
+    <state width="1112" height="330" key="GridCell.Tab.1.right" timestamp="1575662817781">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state width="1112" height="330" key="GridCell.Tab.1.right/-1920.0.1920.1050/0.0.1920.1050/-1930.1080.1097.617@0.0.1920.1050" timestamp="1575662817781" />
     <state x="457" y="96" key="SettingsEditor" timestamp="1575339256704">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state x="457" y="96" key="SettingsEditor/-1920.0.1920.1050/0.0.1920.1050/-1930.1080.1097.617@0.0.1920.1050" timestamp="1575339256704" />
-    <state x="652" y="347" key="com.intellij.ide.util.TipDialog" timestamp="1575550940801">
+    <state x="652" y="347" key="com.intellij.ide.util.TipDialog" timestamp="1575643027028">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state x="652" y="347" key="com.intellij.ide.util.TipDialog/-1920.0.1920.1050/0.0.1920.1050/-1930.1080.1097.617@0.0.1920.1050" timestamp="1575550940801" />
+    <state x="652" y="347" key="com.intellij.ide.util.TipDialog/-1920.0.1920.1050/0.0.1920.1050/-1930.1080.1097.617@0.0.1920.1050" timestamp="1575643027028" />
     <state x="1106" y="237" key="com.intellij.testIntegration.createTest.CreateTestDialog" timestamp="1575509829235">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state x="1106" y="237" key="com.intellij.testIntegration.createTest.CreateTestDialog/-1920.0.1920.1050/0.0.1920.1050/-1930.1080.1097.617@0.0.1920.1050" timestamp="1575509829235" />
-    <state x="1071" y="465" width="540" height="475" key="extract.method.dialog" timestamp="1575523685863">
+    <state x="1071" y="465" width="540" height="475" key="extract.method.dialog" timestamp="1575657825151">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state x="1071" y="465" width="540" height="475" key="extract.method.dialog/-1920.0.1920.1050/0.0.1920.1050/-1930.1080.1097.617@0.0.1920.1050" timestamp="1575523685863" />
+    <state x="1071" y="465" width="540" height="475" key="extract.method.dialog/-1920.0.1920.1050/0.0.1920.1050/-1930.1080.1097.617@0.0.1920.1050" timestamp="1575657825151" />
     <state x="1024" y="265" width="633" height="520" key="find.popup" timestamp="1575523625552">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state x="1024" y="265" width="633" height="520" key="find.popup/-1920.0.1920.1050/0.0.1920.1050/-1930.1080.1097.617@0.0.1920.1050" timestamp="1575523625552" />
-    <state x="1004" y="231" width="672" height="678" key="search.everywhere.popup" timestamp="1575523645831">
+    <state x="1049" y="151" key="refactoring.ChangeSignatureDialog" timestamp="1575657628720">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state x="1004" y="231" width="672" height="678" key="search.everywhere.popup/-1920.0.1920.1050/0.0.1920.1050/-1930.1080.1097.617@0.0.1920.1050" timestamp="1575523645831" />
+    <state x="1049" y="151" key="refactoring.ChangeSignatureDialog/-1920.0.1920.1050/0.0.1920.1050/-1930.1080.1097.617@0.0.1920.1050" timestamp="1575657628720" />
+    <state x="1004" y="231" width="672" height="678" key="search.everywhere.popup" timestamp="1575661048617">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state x="1004" y="231" width="672" height="678" key="search.everywhere.popup/-1920.0.1920.1050/0.0.1920.1050/-1930.1080.1097.617@0.0.1920.1050" timestamp="1575661048617" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -371,11 +388,27 @@
           <url>jar://$MAVEN_REPOSITORY$/pl/pragmatists/JUnitParams/1.1.1/JUnitParams-1.1.1.jar!/junitparams/Parameters.class</url>
           <option name="timeStamp" value="3" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/net/gentledot/demorestapi/events/EventController.java</url>
+          <line>142</line>
+          <option name="timeStamp" value="17" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/net/gentledot/demorestapi/events/EventController.java</url>
+          <line>144</line>
+          <option name="timeStamp" value="18" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
     <watches-manager>
       <configuration name="JUnit">
         <watch expression="pageable" />
+        <watch expression="targetEvent" />
+        <watch expression="targetEvent.manager" />
+        <watch expression="currentUser" />
+        <watch expression="((DeferredLinesWriter)((LinesWritingResultHandler)((java.util.ArrayList)((MockMvc)((EventControllerTest)this).mockMvc).defaultResultHandlers).get(0)).writer).lines" custom="org.springframework.boot.test.autoconfigure.web.servlet.SpringBootMockMvcBuilderCustomizer.DeferredLinesWriter,org.springframework.test.web.servlet.MockMvc,net.gentledot.demorestapi.events.EventControllerTest,java.util.ArrayList,org.springframework.boot.test.autoconfigure.web.servlet.SpringBootMockMvcBuilderCustomizer.LinesWritingResultHandler" />
+        <watch expression="((EventControllerTest)this).eventRepository" custom="net.gentledot.demorestapi.events.EventControllerTest" />
+        <watch expression="event.manager" />
       </configuration>
     </watches-manager>
   </component>

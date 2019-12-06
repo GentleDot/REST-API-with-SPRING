@@ -60,35 +60,34 @@ public class EventControllerTest extends BaseControllerTest {
     }
 
     private FieldDescriptor[] eventFields = new FieldDescriptor[]{
-            fieldWithPath("name").description("name of event"),
-            fieldWithPath("description").description("description of event"),
-            fieldWithPath("beginEnrollmentDateTime").description("date time of beginEnrollmentDateTime"),
-            fieldWithPath("closeEnrollmentDateTime").description("date time of closeEnrollmentDateTime"),
-            fieldWithPath("beginEventDateTime").description("date time of beginEventDateTime"),
-            fieldWithPath("endEventDateTime").description("date time of endEventDateTime"),
-            fieldWithPath("location").description("location of event"),
-            fieldWithPath("basePrice").description("basePrice of event"),
-            fieldWithPath("maxPrice").description("maxPrice of event"),
-            fieldWithPath("limitOfEnrollment").description("limit Of enrollment"),
+            fieldWithPath("name").description("이벤트명(event name)"),
+            fieldWithPath("description").description("이벤트 설명(description of event)"),
+            fieldWithPath("beginEnrollmentDateTime").description("이벤트 등록 시작일시(date time of begin enrollment)"),
+            fieldWithPath("closeEnrollmentDateTime").description("이벤트 등록 종료일시(date time of close enrollment)"),
+            fieldWithPath("beginEventDateTime").description("이벤트 시작일시(date time of begin event)"),
+            fieldWithPath("endEventDateTime").description("이벤트 종료일시(date time of end event"),
+            fieldWithPath("location").description("이벤트 장소(location of event) * 장소가 없다면 온라인 이벤트"),
+            fieldWithPath("basePrice").description("이벤트 등록비 - 최소한도(base price of event)"),
+            fieldWithPath("maxPrice").description("이벤트 등록비 - 최대한도(max price of event)"),
+            fieldWithPath("limitOfEnrollment").description("이벤트 등록 가능 인원(limit Of enrollment)"),
 
     };
 
     private FieldDescriptor[] getEventsFields = new FieldDescriptor[]{
-            fieldWithPath("_embedded.eventList[].id").description("identifier of new event"),
-            fieldWithPath("_embedded.eventList[].offline").description("information about if this event is offline event or not"),
-            fieldWithPath("_embedded.eventList[].free").description("information about if this event is free or not"),
-            fieldWithPath("_embedded.eventList[].eventStatus").description("event status"),
-            fieldWithPath("_embedded.eventList[].name").description("name of new event"),
-            fieldWithPath("_embedded.eventList[].description").description("description of new event"),
-            fieldWithPath("_embedded.eventList[].beginEnrollmentDateTime").description("date time of beginEnrollmentDateTime"),
-            fieldWithPath("_embedded.eventList[].closeEnrollmentDateTime").description("date time of closeEnrollmentDateTime"),
-            fieldWithPath("_embedded.eventList[].beginEventDateTime").description("date time of beginEventDateTime"),
-            fieldWithPath("_embedded.eventList[].endEventDateTime").description("date time of endEventDateTime"),
-            fieldWithPath("_embedded.eventList[].location").description("location of new event"),
-            fieldWithPath("_embedded.eventList[].basePrice").description("basePrice of new event"),
-            fieldWithPath("_embedded.eventList[].maxPrice").description("maxPrice of new event"),
-            fieldWithPath("_embedded.eventList[].limitOfEnrollment").description("limit Of enrollment"),
-            fieldWithPath("_embedded.eventList[].manager").description("event owner"),
+            fieldWithPath("_embedded.eventList[].id").description("이벤트 구분자(identifier of event)"),
+            fieldWithPath("_embedded.eventList[].offline").description("이벤트 장소 구분 - 오프라인 / 온라인(information about if this event is offline event or not)"),
+            fieldWithPath("_embedded.eventList[].free").description("이벤트 무료 여부(information about if this event is free or not)"),
+            fieldWithPath("_embedded.eventList[].eventStatus").description("이벤트 진행 상태(event status)"),
+            fieldWithPath("_embedded.eventList[].name").description("이벤트명(event name)"),
+            fieldWithPath("_embedded.eventList[].description").description("이벤트 설명(description of event)"),
+            fieldWithPath("_embedded.eventList[].beginEnrollmentDateTime").description("이벤트 등록 시작일시(date time of begin enrollment)"),
+            fieldWithPath("_embedded.eventList[].closeEnrollmentDateTime").description("이벤트 등록 종료일시(date time of close enrollment)"),
+            fieldWithPath("_embedded.eventList[].beginEventDateTime").description("이벤트 시작일시(date time of begin event)"),
+            fieldWithPath("_embedded.eventList[].endEventDateTime").description("이벤트 종료일시(date time of end event"),
+            fieldWithPath("_embedded.eventList[].location").description("이벤트 장소(location of event) * 장소가 없다면 온라인 이벤트"),
+            fieldWithPath("_embedded.eventList[].basePrice").description("이벤트 등록비 - 최소한도(base price of event)"),
+            fieldWithPath("_embedded.eventList[].maxPrice").description("이벤트 등록비 - 최대한도(max price of event)"),
+            fieldWithPath("_embedded.eventList[].limitOfEnrollment").description("이벤트 등록 가능 인원(limit Of enrollment)"),
             fieldWithPath("_embedded.eventList[]._links.self.href").description("self link")
     };
 
@@ -160,7 +159,8 @@ public class EventControllerTest extends BaseControllerTest {
                                 fieldWithPath("offline").description("information about if this event is offline event or not"),
                                 fieldWithPath("free").description("information about if this event is free or not"),
                                 fieldWithPath("eventStatus").description("event status"),
-                                fieldWithPath("manager").description("event owner"),
+                                fieldWithPath("manager.id").description("identifier of event manager"),
+                                fieldWithPath("manager.email").description("email address of event manager"),
                                 subsectionWithPath("_links").description("links in event (self, query-events, update-event)")
                         ).and(this.eventFields))
                 );
@@ -169,7 +169,7 @@ public class EventControllerTest extends BaseControllerTest {
     /* 입력 값 중에서 받기로 한 값 이외의 값이 들어온 경우 - 400 error 출력 */
     @Test
     @TestDescription("입력 받기로 한 값 이외의 값이 들어올 때 에러가 발생하는 테스트 (400 error)")
-    public void createEvent_badRequest_inputNotDtoData() throws Exception {
+    public void createEventWithBadRequestInputNotDtoData() throws Exception {
         // 요청 입력
         Event event = Event.eventBuilder()
                 // Id는 AutoGenerated
@@ -209,7 +209,7 @@ public class EventControllerTest extends BaseControllerTest {
 
     @Test
     @TestDescription("빈값이 들어올 때 에러를 발생하는 테스트 (400 error)")
-    public void createEvent_badRequest_emptyInput() throws Exception {
+    public void createEventWithBadRequestEmptyInput() throws Exception {
         EventDto eventDto = EventDto.builder().build();
 
         this.mockMvc.perform(post("/api/events")
@@ -221,7 +221,7 @@ public class EventControllerTest extends BaseControllerTest {
 
     @Test
     @TestDescription("정상적이지 않은 값이 들어올 때 에러가 발생하는 테스트 (400 error)")
-    public void createEvent_badRequest_wrongInput() throws Exception {
+    public void createEventWithBadRequestWrongInput() throws Exception {
         EventDto eventDto = EventDto.builder()
                 // Id는 AutoGenerated
                 .name("Spring")
@@ -249,10 +249,70 @@ public class EventControllerTest extends BaseControllerTest {
                 .andExpect(jsonPath("_links.index").exists());
     }
 
+    @Test
+    @TestDescription("30개의 이벤트를 10개씩 출력하여 2번째 페이지 조회하기 - 권한정보 확인")
+    public void getEventsWithPagingAndAuthentication() throws Exception {
+        //  given
+        Account account = createAccount();
+
+        // Lambda
+//        IntStream.range(0, 30).forEach(i -> {
+//            this.generateEvent(i);
+//        });
+        // Method Reference
+//        IntStream.range(0, 30).forEach(this::generateEvent);
+        // For loop
+        for (int i = 0; i < 30; i++) {
+            this.generateEvent(i, account);
+        }
+
+        // when
+        ResultActions perform = this.mockMvc.perform(get("/api/events")
+                .param("page", "1")
+                .param("size", "10")
+                .param("sort", "name,DESC"));
+
+        // then
+        this.mockMvc.perform(get("/api/events")
+                .header(HttpHeaders.AUTHORIZATION, getBearerToken(false))
+                .param("page", "1")
+                .param("size", "10")
+                .param("sort", "name,DESC"))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("page").exists())
+                .andExpect(jsonPath("_links.self").exists())
+                .andExpect(jsonPath("_links.profile").exists())
+                .andExpect(jsonPath("_links.create-event").exists())
+                .andDo(document("get-events",
+                        links(
+                                linkWithRel("first").description("link to first event page"),
+                                linkWithRel("prev").description("link to previous event page"),
+                                linkWithRel("self").description("link to self"),
+                                linkWithRel("next").description("link to next event page"),
+                                linkWithRel("last").description("link to last event page"),
+                                linkWithRel("profile").description("link to profile (how to get events)"),
+                                linkWithRel("create-event").description("link to create event (when authorized user was logged in)")
+                        ),
+                        responseHeaders(
+                                headerWithName(HttpHeaders.CONTENT_TYPE).description("content type (application/hal+json;charset=UTF-8)")
+                        ),
+                        responseFields(
+                                fieldWithPath("page.size").description("printed events number in a page"),
+                                fieldWithPath("page.totalElements").description("total event count"),
+                                fieldWithPath("page.totalPages").description("total page count"),
+                                fieldWithPath("page.number").description("current page number (start with 0)"),
+                                fieldWithPath("_embedded.eventList[].manager.id").description("이벤트 매니저 구분자(identifier of event manager)"),
+                                fieldWithPath("_embedded.eventList[].manager.email").description("이벤트 매니저 이메일주소(email adress or event manager)"),
+                                subsectionWithPath("_links").description("links in getEvents (first, prev, self, next, last, profile)")
+                        ).and(this.getEventsFields))
+                );
+
+    }
 
     @Test
-    @TestDescription("30개의 이벤트를 10개씩 출력하여 2번째 페이지 조회하기")
-    public void getEvents_with_paging() throws Exception {
+    @TestDescription("30개의 이벤트를 10개씩 출력하여 2번째 페이지 조회하기 - anonymous")
+    public void getEventsWithPagingWhenNotLogin() throws Exception {
         //  given
         // Lambda
 //        IntStream.range(0, 30).forEach(i -> {
@@ -280,35 +340,15 @@ public class EventControllerTest extends BaseControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("page").exists())
                 .andExpect(jsonPath("_links.self").exists())
-                .andExpect(jsonPath("_links.profile").exists())
-                .andDo(document("get-events",
-                        links(
-                                linkWithRel("first").description("link to first event page"),
-                                linkWithRel("prev").description("link to previous event page"),
-                                linkWithRel("self").description("link to self"),
-                                linkWithRel("next").description("link to next event page"),
-                                linkWithRel("last").description("link to last event page"),
-                                linkWithRel("profile").description("link to profile (how to get eventInfo)")
-                        ),
-                        responseHeaders(
-                                headerWithName(HttpHeaders.CONTENT_TYPE).description("content type (application/hal+json;charset=UTF-8)")
-                        ),
-                        responseFields(
-                                fieldWithPath("page.size").description("printed events number in a page"),
-                                fieldWithPath("page.totalElements").description("total event count"),
-                                fieldWithPath("page.totalPages").description("total page count"),
-                                fieldWithPath("page.number").description("current page number (start with 0)"),
-                                subsectionWithPath("_links").description("links in getEvents (first, prev, self, next, last, profile)")
-                        ).and(this.getEventsFields))
-                );
-
+                .andExpect(jsonPath("_links.profile").exists());
     }
 
     @Test
     @TestDescription("기존 생성 되어있는 이벤트 조회하기")
     public void getEvent() throws Exception {
         // given
-        Event event = this.generateEvent(100);
+        Account account = this.createAccount();
+        Event event = this.generateEvent(100, account);
 
         // when
         ResultActions perform = this.mockMvc.perform(get("/api/events/{id}", event.getId()));
@@ -334,12 +374,12 @@ public class EventControllerTest extends BaseControllerTest {
                                 fieldWithPath("offline").description("information about if this event is offline event or not"),
                                 fieldWithPath("free").description("information about if this event is free or not"),
                                 fieldWithPath("eventStatus").description("event status"),
-                                fieldWithPath("manager").description("event owner"),
+                                fieldWithPath("manager.id").description("identifier of event manager"),
+                                fieldWithPath("manager.email").description("email address of event manager"),
                                 subsectionWithPath("_links").description("links in event (self, profile)")
                         ).and(this.eventFields))
                 );
     }
-
 
     @Test
     @TestDescription("없는 이벤트 조회하기 (404 not found)")
@@ -358,8 +398,8 @@ public class EventControllerTest extends BaseControllerTest {
     @TestDescription("기존 생성 되어있는 이벤트 수정하기")
     public void updateEvent() throws Exception {
         // given
-        this.generateEvent(107);
-        Event event = this.generateEvent(108);
+        Account account = this.createAccount();
+        Event event = this.generateEvent(108, account);
         EventDto eventDto = EventDto.builder()
                 .name("modified event")
                 .description(event.getDescription())
@@ -380,7 +420,7 @@ public class EventControllerTest extends BaseControllerTest {
 
         // then
         this.mockMvc.perform(put("/api/events/{id}", event.getId())
-                .header(HttpHeaders.AUTHORIZATION, getBearerToken())
+                .header(HttpHeaders.AUTHORIZATION, getBearerToken(false))
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(this.objectMapper.writeValueAsString(eventDto)))
                 .andExpect(status().isOk())
@@ -408,12 +448,75 @@ public class EventControllerTest extends BaseControllerTest {
                                 fieldWithPath("offline").description("information about if this event is offline event or not"),
                                 fieldWithPath("free").description("information about if this event is free or not"),
                                 fieldWithPath("eventStatus").description("event status"),
-                                fieldWithPath("manager").description("event owner"),
+                                fieldWithPath("manager.id").description("identifier of event manager"),
+                                fieldWithPath("manager.email").description("email address of event manager"),
                                 subsectionWithPath("_links").description("links in event (self, profile)")
                         ).and(this.eventFields))
                 );
     }
 
+    @Test
+    @TestDescription("기존 생성 되어있는 이벤트 수정하기 - Account 정보 없음")
+    public void updateEventWithUnauthorized() throws Exception {
+        // given
+        Event event = this.generateEvent(108);
+        EventDto eventDto = EventDto.builder()
+                .name("modified event")
+                .description(event.getDescription())
+                .beginEnrollmentDateTime(LocalDateTime.of(2019, 12, 2, 9, 0))
+                .closeEnrollmentDateTime(LocalDateTime.of(2019, 12, 6, 23, 59))
+                .beginEventDateTime(LocalDateTime.of(2019, 12, 16, 10, 0))
+                .endEventDateTime(LocalDateTime.of(2020, 1, 3, 18, 30))
+                .basePrice(85000)
+                .maxPrice(1250000)
+                .limitOfEnrollment(60)
+                .location("")
+                .build();
+
+        // when
+        ResultActions actions = this.mockMvc.perform(put("/api/events/{id}", event.getId())
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(this.objectMapper.writeValueAsString(eventDto)));
+
+        // then
+        this.mockMvc.perform(put("/api/events/{id}", event.getId())
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(this.objectMapper.writeValueAsString(eventDto)))
+                .andExpect(status().isUnauthorized());
+    }
+
+    @Test
+    @TestDescription("기존 생성 되어있는 이벤트 수정하기 - 사용자가 다른 경우")
+    public void updateEventWithForbiddenResponse() throws Exception {
+        // given
+        Account account = this.createAccount();
+        Account anotherAccount = this.createTestAccount();
+        Event event = this.generateEvent(108, account);
+        EventDto eventDto = EventDto.builder()
+                .name("modified event")
+                .description(event.getDescription())
+                .beginEnrollmentDateTime(LocalDateTime.of(2019, 12, 2, 9, 0))
+                .closeEnrollmentDateTime(LocalDateTime.of(2019, 12, 6, 23, 59))
+                .beginEventDateTime(LocalDateTime.of(2019, 12, 16, 10, 0))
+                .endEventDateTime(LocalDateTime.of(2020, 1, 3, 18, 30))
+                .basePrice(85000)
+                .maxPrice(1250000)
+                .limitOfEnrollment(60)
+                .location("")
+                .build();
+
+        // when
+        ResultActions actions = this.mockMvc.perform(put("/api/events/{id}", event.getId())
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(this.objectMapper.writeValueAsString(eventDto)));
+
+        // then
+        this.mockMvc.perform(put("/api/events/{id}", event.getId())
+                .header(HttpHeaders.AUTHORIZATION, getAnotherTestAccessToken())
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(this.objectMapper.writeValueAsString(eventDto)))
+                .andExpect(status().isForbidden());
+    }
 
     @Test
     @TestDescription("없는 이벤트 수정하기 (404 not found)")
@@ -449,7 +552,7 @@ public class EventControllerTest extends BaseControllerTest {
 
     @Test
     @TestDescription("빈 수정 데이터가 들어올 때 에러를 발생하는 테스트 (400 error)")
-    public void updateEvent_badRequest_emptyInput() throws Exception {
+    public void updateEventWithBadRequestEmptyInput() throws Exception {
         // given
         Event event = this.generateEvent(108);
         EventDto eventDto = EventDto.builder().build();
@@ -470,7 +573,7 @@ public class EventControllerTest extends BaseControllerTest {
 
     @Test
     @TestDescription("수정값 중에 받기로 한 값 이외의 값이 들어올 때 에러가 발생하는 테스트 (400 error)")
-    public void updateEvent_badRequest_inputNotDtoData() throws Exception {
+    public void updateEventWithBadRequestInputNotDtoData() throws Exception {
         // given
         Event event = this.generateEvent(108);
         EventDto eventDto = EventDto.builder()
@@ -506,26 +609,37 @@ public class EventControllerTest extends BaseControllerTest {
     }
 
     private Event generateEvent(int index) {
-        Event event = Event.eventBuilder()
+        Event event = buildEvent(index);
+        return this.eventRepository.save(event);
+    }
+
+
+    private Event generateEvent(int index, Account account) {
+        Event event = buildEvent(index);
+        event.setManager(account);
+        return this.eventRepository.save(event);
+    }
+
+    private Event buildEvent(int index) {
+        return Event.eventBuilder()
                 .name("testEvent" + index)
                 .description("test event_" + index)
                 .basePrice(100)
                 .build();
-
-        return this.eventRepository.save(event);
     }
 
     private String getBearerToken() throws Exception {
-        return "Bearer" + getAccessToken();
+        return "Bearer" + getAccessToken(true);
     }
 
-    private String getAccessToken() throws Exception {
-        Account account = Account.builder()
-                .email(properties.getUsername())
-                .password(properties.getUserPassword())
-                .roles(Set.of(AccountRole.ADMIN, AccountRole.USER))
-                .build();
-        this.accountService.saveAccount(account);
+    private String getBearerToken(Boolean needToCreateAccount) throws Exception {
+        return "Bearer" + getAccessToken(needToCreateAccount);
+    }
+
+    private String getAccessToken(Boolean needToCreateAccount) throws Exception {
+        if (needToCreateAccount) {
+            createAccount();
+        }
 
         ResultActions perform = this.mockMvc.perform(post("/oauth/token")
                 .with(httpBasic(properties.getClientId(), properties.getClientSecret()))
@@ -538,6 +652,39 @@ public class EventControllerTest extends BaseControllerTest {
         String responseBody = perform.andReturn().getResponse().getContentAsString();
         Jackson2JsonParser jsonParser = new Jackson2JsonParser();
         return jsonParser.parseMap(responseBody).get("access_token").toString();
+    }
+
+    private Account createAccount() {
+        Account account = Account.builder()
+                .email(properties.getUsername())
+                .password(properties.getUserPassword())
+                .roles(Set.of(AccountRole.ADMIN, AccountRole.USER))
+                .build();
+        return this.accountService.saveAccount(account);
+    }
+
+    private Account createTestAccount() {
+        Account account = Account.builder()
+                .email(properties.getTestUsername())
+                .password(properties.getTestUserPassword())
+                .roles(Set.of(AccountRole.ADMIN, AccountRole.USER))
+                .build();
+        return this.accountService.saveAccount(account);
+    }
+
+    private String getAnotherTestAccessToken() throws Exception {
+
+        ResultActions perform = this.mockMvc.perform(post("/oauth/token")
+                .with(httpBasic(properties.getClientId(), properties.getClientSecret()))
+                .param("username", properties.getTestUsername())
+                .param("password", properties.getTestUserPassword())
+                .param("grant_type", "password"));
+
+//        MockHttpServletResponse response = perform.andReturn().getResponse();
+//        String responseBody = response.getContentAsString();
+        String responseBody = perform.andReturn().getResponse().getContentAsString();
+        Jackson2JsonParser jsonParser = new Jackson2JsonParser();
+        return "Bearer" + jsonParser.parseMap(responseBody).get("access_token").toString();
     }
 
 }

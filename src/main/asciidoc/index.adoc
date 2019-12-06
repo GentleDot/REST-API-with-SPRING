@@ -63,12 +63,14 @@ RESTful notes tries to adhere as closely as possible to standard HTTP and REST c
 | 요청한 리소스가 없음.(The requested resource did not exist)
 |===
 
+////
 [[overview-headers]]
 == Headers
 
 Every response has the following header(s):
 
 include::{snippets}/headers-example/response-headers.adoc[]
+////
 
 [[overview-errors]]
 == 오류(Errors)
@@ -76,15 +78,19 @@ include::{snippets}/headers-example/response-headers.adoc[]
 에러 응답이 발생했을 때 (상태 코드 >= 400), 본문에 해당 문제를 기술한 JSON 객체가 담겨있다. +
 Whenever an error response (status code >= 400) is returned, the body will contain a JSON object that describes the problem. +
 
+////
 에러 객체는 다음의 구조를 따른다. +
 The error object has the following structure:
 
 include::{snippets}/error-example/response-fields.adoc[]
+////
 
-예를 들어, 잘못된 요청으로 이벤트를 만들려고 했을 때 다음과 같은 `400 Bad Request` 응답을 받는다. +
+예를 들어, 잘못된 요청으로 이벤트를 만들려고 했을 때 `400 Bad Request` 응답을 받는다. +
 For example, a request that attempts to apply a non-existent tag to a note will produce a `400 Bad Request` response:
 
+////
 include::{snippets}/error-example/http-response.adoc[]
+////
 
 [[overview-hypermedia]]
 == 하이퍼미디어(Hypermedia)
@@ -122,10 +128,10 @@ Users of the API should not create URIs themselves, instead they should use the 
 `GET` 요청을 사용하여 인덱스에 접근할 수 있다.
 A `GET` request is used to access the index
 
-operation::index-example[snippets='response-fields,http-response,links']
+operation::index-example[snippets='http-response']
 
 
-
+////
 [[resources-notes]]
 == Notes
 
@@ -173,76 +179,7 @@ operation::tags-list-example[snippets='response-fields,curl-request,http-respons
 A `POST` request is used to create a note
 
 operation::tags-create-example[snippets='request-fields,curl-request,http-response']
-
-
-
-[[resources-note]]
-== Note
-
-The Note resource is used to retrieve, update, and delete individual notes
-
-
-
-[[resources-note-links]]
-=== Links
-
-include::{snippets}/note-get-example/links.adoc[]
-
-
-
-[[resources-note-retrieve]]
-=== Retrieve a note
-
-A `GET` request will retrieve the details of a note
-
-operation::note-get-example[snippets='response-fields,curl-request,http-response']
-
-
-
-[[resources-note-update]]
-=== Update a note
-
-A `PATCH` request is used to update a note
-
-==== Request structure
-
-include::{snippets}/note-update-example/request-fields.adoc[]
-
-To leave an attribute of a note unchanged, any of the above may be omitted from the request.
-
-operation::note-update-example[snippets='curl-request,http-response']
-
-
-
-[[resources-tag]]
-== Tag
-
-The Tag resource is used to retrieve, update, and delete individual tags
-
-
-
-[[resources-tag-links]]
-=== Links
-
-include::{snippets}/tag-get-example/links.adoc[]
-
-
-
-[[resources-tag-retrieve]]
-=== Retrieve a tag
-
-A `GET` request will retrieve the details of a tag
-
-operation::tag-get-example[snippets='response-fields,curl-request,http-response']
-
-
-
-[[resources-tag-update]]
-=== Update a tag
-
-A `PATCH` request is used to update a tag
-
-operation::tag-update-example[snippets='request-fields,curl-request,http-response']
+////
 
 
 

@@ -1,5 +1,7 @@
 package net.gentledot.demorestapi.events;
 
+import net.gentledot.demorestapi.accounts.Account;
+import net.gentledot.demorestapi.accounts.CurrentUser;
 import net.gentledot.demorestapi.common.ErrorEntityModel;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
@@ -10,6 +12,7 @@ import org.springframework.hateoas.Link;
 import org.springframework.hateoas.MediaTypes;
 import org.springframework.hateoas.PagedModel;
 import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
@@ -42,7 +45,9 @@ public class EventController {
 
 
     @PostMapping
-    public ResponseEntity createEvent(@RequestBody @Valid EventDto eventDto, Errors errors) {
+    public ResponseEntity createEvent(@RequestBody @Valid EventDto eventDto,
+                                      Errors errors,
+                                      @CurrentUser Account currentUser) {
         if (errors.hasErrors()) {
             return badRequest(errors);
         }
@@ -62,7 +67,7 @@ public class EventController {
        */
         Event event = this.modelMapper.map(eventDto, Event.class);
         event = eventService.updateEventEntities(event);
-
+        event.setManager(currentUser);
         Event newEvent = eventService.createNewEvent(event);
 
         WebMvcLinkBuilder eventLinkUrl = linkTo(EventController.class);
@@ -77,18 +82,25 @@ public class EventController {
     }
 
     @GetMapping
-    public ResponseEntity getEvents(Pageable pageable, PagedResourcesAssembler<Event> resourcesAssembler) {
-        Page<Event> page = this.eventService.getEventsWithPaging(pageable);
+    public ResponseEntity getEvents(Pageable pageable, PagedResourcesAssembler<Event> resourcesAssembler
+            , @CurrentUser Account currentUser) {
+//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+//        User principal = (org.springframework.security.core.userdetails.User)authentication.getPrincipal();
 
+        Page<Event> page = this.eventService.getEventsWithPaging(pageable);
 
         // Resource -> Model
         PagedModel<EntityModel<Event>> entityModels = resourcesAssembler.toModel(page, entity -> new EventEntityModel(entity));
         entityModels.add(new Link("/docs/index.html#resources-events-list").withRel("profile"));
+        if (currentUser != null) {
+            entityModels.add(linkTo(EventController.class).withRel("create-event"));
+        }
         return ResponseEntity.ok(entityModels);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity getEvent(@PathVariable Integer id) {
+    public ResponseEntity getEvent(@PathVariable Integer id,
+                                   @CurrentUser Account currentUser) {
         Optional<Event> optionalEvent = this.eventService.getEvent(id);
 
         if (optionalEvent.isEmpty()) {
@@ -98,11 +110,18 @@ public class EventController {
         Event event = optionalEvent.get();
         EventEntityModel eventEntityModel = new EventEntityModel(event);
         eventEntityModel.add(new Link("/docs/index.html#resources-events-get").withRel("profile"));
+        if (event.getManager().equals(currentUser)) {
+            eventEntityModel.add(linkTo(EventController.class).slash(event.getId()).withRel("update-event"));
+        }
+
         return ResponseEntity.ok(eventEntityModel);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity updateEvent(@PathVariable Integer id, @RequestBody @Valid EventDto eventDto, Errors errors) {
+    public ResponseEntity updateEvent(@PathVariable Integer id,
+                                      @RequestBody @Valid EventDto eventDto,
+                                      Errors errors,
+                                      @CurrentUser Account currentUser) {
         Optional<Event> optionalEvent = this.eventService.getEvent(id);
 
         if (optionalEvent.isEmpty()) {
@@ -120,6 +139,12 @@ public class EventController {
         /* 강의와 다른 부분은 주석 처리 : 20191130_gentledot */
 //        Event eventData = this.modelMapper.map(eventDto, Event.class);
 //        eventData = eventService.updateEventEntities(eventData);
+
+        if (currentUser == null) {
+            return new ResponseEntity(HttpStatus.UNAUTHORIZED);
+        } else if (!targetEvent.getManager().equals(currentUser)) {
+            return new ResponseEntity(HttpStatus.FORBIDDEN);
+        }
 
         this.modelMapper.map(eventDto, targetEvent);
         Event eventData = eventService.updateEventEntities(targetEvent);

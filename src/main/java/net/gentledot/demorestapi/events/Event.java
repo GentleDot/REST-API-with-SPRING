@@ -1,9 +1,10 @@
 package net.gentledot.demorestapi.events;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.*;
 import net.gentledot.demorestapi.accounts.Account;
+import net.gentledot.demorestapi.accounts.AccountSerializer;
 import org.hibernate.annotations.DynamicUpdate;
-import org.hibernate.annotations.SortNatural;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -39,6 +40,7 @@ public class Event {
     @Enumerated(EnumType.STRING)
     private EventStatus eventStatus = EventStatus.DRAFT;
     @ManyToOne
+    @JsonSerialize(using = AccountSerializer.class) // 동일한 Annotation이 존재하므로 주의 (org.codehaus.jackson.map.annotate.JsonSerialize)
     private Account manager;
 
     public void updateFree() {

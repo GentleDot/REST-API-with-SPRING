@@ -3,7 +3,6 @@ package net.gentledot.demorestapi.accounts;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -32,7 +31,7 @@ public class AccountService implements UserDetailsService {
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
         Account account = accountRepository.findByEmail(userName)
                 .orElseThrow(() -> new UsernameNotFoundException(userName));
-        return new User(account.getEmail(), account.getPassword(), authorities(account.getRoles()));
+        return new AccountAdapter(account);
     }
 
     private Collection<? extends GrantedAuthority> authorities(Set<AccountRole> roles) {
@@ -40,7 +39,7 @@ public class AccountService implements UserDetailsService {
 //            return new SimpleGrantedAuthority("ROLE" + role.name());
 //        }).collect(Collectors.toSet());
         return roles.stream().map(role ->
-                new SimpleGrantedAuthority("ROLE" + role.name())).collect(Collectors.toSet());
+                new SimpleGrantedAuthority("ROLE_" + role.name())).collect(Collectors.toSet());
     }
 
 }
