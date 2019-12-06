@@ -3,14 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="d91a007d-707d-443a-84aa-0702028bf42f" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/learn-rest-api.iml" beforeDir="false" afterPath="$PROJECT_DIR$/learn-rest-api.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/gentledot/demorestapi/accounts/Account.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/gentledot/demorestapi/accounts/Account.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/gentledot/demorestapi/configs/AppConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/gentledot/demorestapi/configs/AppConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/gentledot/demorestapi/configs/AuthServerConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/gentledot/demorestapi/configs/AuthServerConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/net/gentledot/demorestapi/configs/AuthServerConfigTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/net/gentledot/demorestapi/configs/AuthServerConfigTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/net/gentledot/demorestapi/events/EventControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/net/gentledot/demorestapi/events/EventControllerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/gentledot/demorestapi/configs/ResourceServerConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/gentledot/demorestapi/configs/ResourceServerConfig.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -264,7 +257,7 @@
       <workItem from="1575339085684" duration="5788000" />
       <workItem from="1575383935670" duration="117000" />
       <workItem from="1575425963676" duration="20270000" />
-      <workItem from="1575550783293" duration="4236000" />
+      <workItem from="1575550783293" duration="5127000" />
     </task>
     <servers />
   </component>
@@ -302,6 +295,10 @@
     </option>
   </component>
   <component name="WindowStateProjectService">
+    <state x="933" y="182" key="#Notifications" timestamp="1575556960324">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state x="933" y="182" key="#Notifications/-1920.0.1920.1050/0.0.1920.1050/-1930.1080.1097.617@0.0.1920.1050" timestamp="1575556960324" />
     <state x="1146" y="231" key="#com.intellij.ide.util.MemberChooser" timestamp="1575521867203">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
@@ -310,22 +307,22 @@
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state x="640" y="250" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/-1920.0.1920.1050/0.0.1920.1050/-1930.1080.1097.617@0.0.1920.1050" timestamp="1575338811030" />
-    <state width="1112" height="418" key="GridCell.Tab.0.bottom" timestamp="1575556884270">
+    <state width="1112" height="418" key="GridCell.Tab.0.bottom" timestamp="1575556941081">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state width="1112" height="418" key="GridCell.Tab.0.bottom/-1920.0.1920.1050/0.0.1920.1050/-1930.1080.1097.617@0.0.1920.1050" timestamp="1575556884270" />
-    <state width="1112" height="418" key="GridCell.Tab.0.center" timestamp="1575556884270">
+    <state width="1112" height="418" key="GridCell.Tab.0.bottom/-1920.0.1920.1050/0.0.1920.1050/-1930.1080.1097.617@0.0.1920.1050" timestamp="1575556941081" />
+    <state width="1112" height="418" key="GridCell.Tab.0.center" timestamp="1575556941081">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state width="1112" height="418" key="GridCell.Tab.0.center/-1920.0.1920.1050/0.0.1920.1050/-1930.1080.1097.617@0.0.1920.1050" timestamp="1575556884270" />
-    <state width="1112" height="418" key="GridCell.Tab.0.left" timestamp="1575556884270">
+    <state width="1112" height="418" key="GridCell.Tab.0.center/-1920.0.1920.1050/0.0.1920.1050/-1930.1080.1097.617@0.0.1920.1050" timestamp="1575556941081" />
+    <state width="1112" height="418" key="GridCell.Tab.0.left" timestamp="1575556941081">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state width="1112" height="418" key="GridCell.Tab.0.left/-1920.0.1920.1050/0.0.1920.1050/-1930.1080.1097.617@0.0.1920.1050" timestamp="1575556884270" />
-    <state width="1112" height="418" key="GridCell.Tab.0.right" timestamp="1575556884270">
+    <state width="1112" height="418" key="GridCell.Tab.0.left/-1920.0.1920.1050/0.0.1920.1050/-1930.1080.1097.617@0.0.1920.1050" timestamp="1575556941081" />
+    <state width="1112" height="418" key="GridCell.Tab.0.right" timestamp="1575556941081">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state width="1112" height="418" key="GridCell.Tab.0.right/-1920.0.1920.1050/0.0.1920.1050/-1930.1080.1097.617@0.0.1920.1050" timestamp="1575556884270" />
+    <state width="1112" height="418" key="GridCell.Tab.0.right/-1920.0.1920.1050/0.0.1920.1050/-1930.1080.1097.617@0.0.1920.1050" timestamp="1575556941081" />
     <state width="1112" height="418" key="GridCell.Tab.1.bottom" timestamp="1575444066708">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
