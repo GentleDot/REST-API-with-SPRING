@@ -2,23 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d91a007d-707d-443a-84aa-0702028bf42f" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/gentledot/demorestapi/accounts/AccountAdapter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/gentledot/demorestapi/accounts/AccountSerializer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/gentledot/demorestapi/accounts/CurrentUser.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/asciidoc/index.adoc" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/asciidoc/index.adoc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/gentledot/demorestapi/accounts/AccountService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/gentledot/demorestapi/accounts/AccountService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/gentledot/demorestapi/common/AppProperties.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/gentledot/demorestapi/common/AppProperties.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/gentledot/demorestapi/configs/AppConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/gentledot/demorestapi/configs/AppConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/gentledot/demorestapi/configs/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/gentledot/demorestapi/configs/SecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/gentledot/demorestapi/events/Event.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/gentledot/demorestapi/events/Event.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/gentledot/demorestapi/events/EventController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/gentledot/demorestapi/events/EventController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/net/gentledot/demorestapi/DemoRestApiApplicationTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/net/gentledot/demorestapi/DemoRestApiApplicationTests.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/net/gentledot/demorestapi/events/EventControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/net/gentledot/demorestapi/events/EventControllerTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/net/gentledot/demorestapi/index/IndexControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/net/gentledot/demorestapi/index/IndexControllerTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/net/gentledot/demorestapi/events/Event$EventBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/net/gentledot/demorestapi/events/Event$EventBuilder.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/net/gentledot/demorestapi/events/Event.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/net/gentledot/demorestapi/events/Event.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/readme.md" beforeDir="false" afterPath="$PROJECT_DIR$/readme.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -103,16 +88,16 @@
     <key name="CreateTestDialog.RecentsKey">
       <recent name="net.gentledot.demorestapi.configs" />
     </key>
-    <key name="CreateClassDialog.RecentsKey">
-      <recent name="net.gentledot.demorestapi.accounts" />
-      <recent name="net.gentledot.demorestapi.account" />
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\workspace\study\spring-rest-api\src\test\resources" />
+      <recent name="$PROJECT_DIR$/.." />
     </key>
     <key name="CreateTestDialog.Recents.Supers">
       <recent name="" />
     </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\workspace\study\spring-rest-api\src\test\resources" />
-      <recent name="$PROJECT_DIR$/.." />
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="net.gentledot.demorestapi.accounts" />
+      <recent name="net.gentledot.demorestapi.account" />
     </key>
   </component>
   <component name="RunManager" selected="JUnit.All in learn-rest-api">
@@ -213,11 +198,11 @@
     </configuration>
     <list>
       <item itemvalue="JUnit.EventControllerTest" />
-      <item itemvalue="Spring Boot.DemoRestApiApplication" />
       <item itemvalue="JUnit.IndexControllerTest.index" />
       <item itemvalue="JUnit.EventControllerTest.getEventsWithPagingAndAuthentication" />
       <item itemvalue="JUnit.EventControllerTest.getEventsWithPaging" />
       <item itemvalue="JUnit.All in learn-rest-api" />
+      <item itemvalue="Spring Boot.DemoRestApiApplication" />
     </list>
     <recent_temporary>
       <list>
@@ -266,7 +251,9 @@
       <workItem from="1575383935670" duration="117000" />
       <workItem from="1575425963676" duration="20270000" />
       <workItem from="1575550783293" duration="8149000" />
-      <workItem from="1575643026990" duration="23921000" />
+      <workItem from="1575643026990" duration="24219000" />
+      <workItem from="1575796258945" duration="516000" />
+      <workItem from="1576074914375" duration="405000" />
     </task>
     <servers />
   </component>
@@ -356,10 +343,11 @@
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state x="457" y="96" key="SettingsEditor/-1920.0.1920.1050/0.0.1920.1050/-1930.1080.1097.617@0.0.1920.1050" timestamp="1575339256704" />
-    <state x="652" y="347" key="com.intellij.ide.util.TipDialog" timestamp="1575643027028">
+    <state x="652" y="347" key="com.intellij.ide.util.TipDialog" timestamp="1575796260460">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state x="652" y="347" key="com.intellij.ide.util.TipDialog/-1920.0.1920.1050/0.0.1920.1050/-1930.1080.1097.617@0.0.1920.1050" timestamp="1575643027028" />
+    <state x="652" y="347" key="com.intellij.ide.util.TipDialog/-1920.0.1920.1050/0.0.1920.1050@0.0.1920.1050" timestamp="1575796260460" />
     <state x="1106" y="237" key="com.intellij.testIntegration.createTest.CreateTestDialog" timestamp="1575509829235">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
@@ -372,6 +360,10 @@
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state x="1024" y="265" width="633" height="520" key="find.popup/-1920.0.1920.1050/0.0.1920.1050/-1930.1080.1097.617@0.0.1920.1050" timestamp="1575523625552" />
+    <state x="678" y="226" key="new project wizard" timestamp="1575796769564">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state x="678" y="226" key="new project wizard/-1920.0.1920.1050/0.0.1920.1050@0.0.1920.1050" timestamp="1575796769564" />
     <state x="1049" y="151" key="refactoring.ChangeSignatureDialog" timestamp="1575657628720">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
