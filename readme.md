@@ -11,6 +11,9 @@
 - [출처](#출처)
 - 학습 내용
     - [REST API는 무엇인가?](#REST-API)
+    - [EVENT API](#EVENT-API)
+    - [Project 생성](#Project-생성)
+    - [EVENT API 구현](#EVENT-API-구현)
 
 ## 목표
 1. 스프링부트 기본기 습득
@@ -96,3 +99,88 @@ REST(<b>Re</b>presentational <b>S</b>tate <b>T</b>ransfer)
     - HAL 링크 데이터를 통해 profile, self 등을 추가
     - 명세는 Spring REST Docs를 통해 문서화하여 링크 제공
   
+  
+### EVENT API
+- 문서
+    - Spring REST Docs로 제작
+        - [생성한 Spring REST Docs](./rest-doc-sample.html)
+
+- 이벤트 
+1. GET /api/events (이벤트 목록 조회)
+    - 로그인 없이 접속한 상태
+        - 이벤트 목록
+        - 링크
+            - self : 리턴하는 자신의 Request URI 
+            - profile : 이벤트 목록 조회 API 문서로 링크
+            - get-event : 이벤트 하나를 조회하는 API 링크
+            - next : 다음 페이지 (optional)
+            - prev : 이전 페이지 (optional)
+         
+    - 로그인 상태 (Bearer Header에 유효한 AccessToken이 들어있는 경우)
+        - 이벤트 목록
+        - 링크
+            - self  
+            - profile
+            - get-event
+            - create-event : 이벤트를 생성할 수 있는 API 링크
+            - next 
+            - prev
+
+1. POST /api/events (이벤트 생성)
+    - 로그인 없이 접속한 상태
+        - 인증 필요
+    
+    - 로그인 상태
+        - 생성된 이벤트 정보
+        - 링크
+            - self
+            - update-event : 생성된 이벤트를 수정할 수 있는 API 링크
+            - query-events : 이벤트 목록 조회할 수 있는 API 링크
+            - profile
+
+1. GET /api/events/{id} (특정 이벤트 하나 조회)
+    - 로그인 여부와 상관없이
+        - 조회한 이벤트 정보
+        - 링크
+            - self
+            - profile
+
+1. PUT /api/events/{id} (이벤트 수정)
+    - 로그인 필요 
+        - 수정된 이벤트 정보
+        - 링크
+            - self
+            - profile
+            
+            
+### Project 생성
+- Spring Boot로 생성
+    - 의존성 설정 (maven, gradle)
+    - 자동 설정 (@EnableAutoConfiguration)
+    - 내장 웹 서버 (servlet, tomcat)
+    - 독립적으로 실행 가능한 JAR (pom.xml의 플러그인)
+
+- Java 11 버전
+
+- 의존성 설정 (Maven : [pom.xml](pom.xml))
+    - Web
+    - JPA
+    - HATEOAS
+    - REST Docs
+    - H2
+    - PostgreSQL
+    - Lombok
+    - test (junit)
+
+- 추가 기능에 대한 의존성 추가
+    - modelmapper
+    - spring-security-oauth2-autoconfigure
+    - spring-boot-configuration-processor
+    - spring-security-test
+    
+### EVENT API 구현
+비즈니스 로직 구현
+
+#### 생성 API 구현
+
+

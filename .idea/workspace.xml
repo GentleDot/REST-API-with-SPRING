@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d91a007d-707d-443a-84aa-0702028bf42f" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/learn-rest-api.iml" beforeDir="false" afterPath="$PROJECT_DIR$/learn-rest-api.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/readme.md" beforeDir="false" afterPath="$PROJECT_DIR$/readme.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -71,7 +73,7 @@
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit4" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit4" value="" />
     <property name="extract.method.default.visibility" value="private" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/test/resources" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -88,23 +90,26 @@
     <key name="CreateTestDialog.RecentsKey">
       <recent name="net.gentledot.demorestapi.configs" />
     </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\workspace\study\spring-rest-api\src\test\resources" />
-      <recent name="$PROJECT_DIR$/.." />
-    </key>
-    <key name="CreateTestDialog.Recents.Supers">
-      <recent name="" />
-    </key>
     <key name="CreateClassDialog.RecentsKey">
       <recent name="net.gentledot.demorestapi.accounts" />
       <recent name="net.gentledot.demorestapi.account" />
     </key>
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\workspace\study\spring-rest-api" />
+      <recent name="C:\workspace\study\spring-rest-api\src\test\resources" />
+      <recent name="$PROJECT_DIR$/.." />
+    </key>
   </component>
-  <component name="RunManager" selected="JUnit.All in learn-rest-api">
+  <component name="RunManager" selected="JUnit.EventControllerTest.getEventsWithPagingAndAuthentication">
     <configuration name="All in learn-rest-api" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="learn-rest-api" />
       <option name="PACKAGE_NAME" value="" />
       <option name="TEST_OBJECT" value="package" />
+      <option name="VM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -120,6 +125,8 @@
       <option name="PACKAGE_NAME" value="net.gentledot.demorestapi.events" />
       <option name="MAIN_CLASS_NAME" value="net.gentledot.demorestapi.events.EventControllerTest" />
       <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -153,6 +160,8 @@
       <option name="MAIN_CLASS_NAME" value="net.gentledot.demorestapi.events.EventControllerTest" />
       <option name="METHOD_NAME" value="getEventsWithPaging" />
       <option name="TEST_OBJECT" value="method" />
+      <option name="VM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -169,6 +178,8 @@
       <option name="MAIN_CLASS_NAME" value="net.gentledot.demorestapi.events.EventControllerTest" />
       <option name="METHOD_NAME" value="getEventsWithPagingAndAuthentication" />
       <option name="TEST_OBJECT" value="method" />
+      <option name="VM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -185,6 +196,8 @@
       <option name="MAIN_CLASS_NAME" value="net.gentledot.demorestapi.index.IndexControllerTest" />
       <option name="METHOD_NAME" value="index" />
       <option name="TEST_OBJECT" value="method" />
+      <option name="VM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -197,10 +210,10 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="JUnit.EventControllerTest" />
-      <item itemvalue="JUnit.IndexControllerTest.index" />
       <item itemvalue="JUnit.EventControllerTest.getEventsWithPagingAndAuthentication" />
+      <item itemvalue="JUnit.IndexControllerTest.index" />
       <item itemvalue="JUnit.EventControllerTest.getEventsWithPaging" />
+      <item itemvalue="JUnit.EventControllerTest" />
       <item itemvalue="JUnit.All in learn-rest-api" />
       <item itemvalue="Spring Boot.DemoRestApiApplication" />
     </list>
@@ -208,9 +221,9 @@
       <list>
         <item itemvalue="JUnit.All in learn-rest-api" />
         <item itemvalue="JUnit.EventControllerTest" />
-        <item itemvalue="JUnit.EventControllerTest.getEventsWithPagingAndAuthentication" />
         <item itemvalue="JUnit.EventControllerTest.getEventsWithPaging" />
         <item itemvalue="JUnit.IndexControllerTest.index" />
+        <item itemvalue="JUnit.EventControllerTest.getEventsWithPagingAndAuthentication" />
       </list>
     </recent_temporary>
   </component>
@@ -255,7 +268,9 @@
       <workItem from="1575796258945" duration="516000" />
       <workItem from="1576074914375" duration="1205000" />
       <workItem from="1576133569332" duration="599000" />
-      <workItem from="1576154196757" duration="3730000" />
+      <workItem from="1576154196757" duration="6339000" />
+      <workItem from="1576227001605" duration="37000" />
+      <workItem from="1576227128129" duration="2542000" />
     </task>
     <servers />
   </component>
@@ -273,20 +288,6 @@
             <State>
               <option name="COLUMN_ORDER" />
             </State>
-          </value>
-        </entry>
-      </map>
-    </option>
-    <option name="RECENT_FILTERS">
-      <map>
-        <entry key="Branch">
-          <value>
-            <list />
-          </value>
-        </entry>
-        <entry key="User">
-          <value>
-            <list />
           </value>
         </entry>
       </map>
@@ -356,6 +357,10 @@
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state x="1106" y="237" key="com.intellij.testIntegration.createTest.CreateTestDialog/-1920.0.1920.1050/0.0.1920.1050/-1930.1080.1097.617@0.0.1920.1050" timestamp="1575509829235" />
+    <state x="27" y="42" width="922" height="823" key="dock-window-1" timestamp="1576229672655">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state x="27" y="42" width="922" height="823" key="dock-window-1/-1920.0.1920.1050/0.0.1920.1050/-1920.1080.1097.617@0.0.1920.1050" timestamp="1576229672655" />
     <state x="1071" y="465" width="540" height="475" key="extract.method.dialog" timestamp="1575657825151">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
