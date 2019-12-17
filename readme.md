@@ -179,8 +179,133 @@ REST(<b>Re</b>presentational <b>S</b>tate <b>T</b>ransfer)
     - spring-security-test
     
 ### EVENT API 구현
-비즈니스 로직 구현
+-> 비즈니스 로직 구현
 
 #### 생성 API 구현
+- 이벤트 Entity 설정
+    ```
+    package net.gentledot.demorestapi.events;
+    
+    import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+    import lombok.*;
+    import net.gentledot.demorestapi.accounts.Account;
+    import net.gentledot.demorestapi.accounts.AccountSerializer;
+    import org.hibernate.annotations.DynamicUpdate;
+    
+    import javax.persistence.*;
+    import java.time.LocalDateTime;
+    
+    @Builder(builderMethodName = "eventBuilder") // 빌더패턴으로 객체 생성
+    @AllArgsConstructor // 생성자(모든 변수를 파라미터로)
+    @NoArgsConstructor // 생성자(파라미터 없음)
+    @Getter // (getXXX 생성)
+    @Setter // (setXXX 생성)
+    @EqualsAndHashCode(of = "id")
+    @Entity // JPA 설정
+    @DynamicUpdate
+    public class Event {
+    
+        @Id
+        @GeneratedValue     // JPA에서 자동 생성
+        private Integer id;
+        private String name;    // 이벤트 이름
+        private String description;     // 이벤트 설명
+        // JPA 3.2 ~ LocalDateTime 매핑 지원
+        private LocalDateTime beginEnrollmentDateTime;  // 등록 시작일시
+        private LocalDateTime closeEnrollmentDateTime;  // 등록 종료일시
+        private LocalDateTime beginEventDateTime;   // 이벤트 시작일시
+        private LocalDateTime endEventDateTime;     // 이벤트 종료일시
+        private String location; // 장소 (optional) 이게 없으면 온라인 모임
+        private int basePrice; // (optional)
+        private int maxPrice; // (optional)
+        private int limitOfEnrollment;
+        private boolean offline;    // 오프라인 여부
+        private boolean free;   // 무료 여부
+        // enum은 default가 EnumType.ORDINAL (순서에 따라 0, 1, n)
+        @Enumerated(EnumType.STRING)
+        private EventStatus eventStatus = EventStatus.DRAFT;
+    ```
+    
+    - basePrice와 maxPrice 경우의 수와 각각의 로직
+    
+    | basePrice | maxPrice | 경우의 수 |
+    | :---: | :---: | --- |
+    | 0 | 100 | 선착순 등록
+    | 0 | 0 | 무료
+    | 100 | 0 | 무제한 경매(높은 금액을 낸 사람이 등록)
+    | 100 | 200 | 제한가 선착순 등록, 더 많이 낸 사림이 우선순위 높음 |
+    
+    - 이벤트 상태
+        - 등록 대기
+        - 이벤트 개설
+        - 인원 모집 시작
+        - 인원 모집 종료
+        - 이벤트 시작
+        - 이벤트 종료
+        
+    ```
+    package net.gentledot.demorestapi.events;
+    
+    public enum EventStatus {
+        DRAFT, PUBLISHED, BEGAN_ENROLLMENT, CLOSED_ENROLLMENT, STARTED, ENDED
+    }
+    ```
+    
+    - 장소가 없으면 온라인 모임
 
+- Lombok Annotation (*** 정리 필요)
+```
+@Builder(builderMethodName = "eventBuilder") // 빌더패턴으로 객체 생성
+    @AllArgsConstructor // 생성자(모든 변수를 파라미터로)
+    @NoArgsConstructor // 생성자(파라미터 없음)
+    @Getter // (getXXX 생성)
+    @Setter // (setXXX 생성)
+    @EqualsAndHashCode(of = "id")
+    @Entity // JPA 설정
+    @DynamicUpdate
+    public class Event {
+```
+   
+#### Controller 생성 및 테스트 (ControllerTest)
 
+- Spring Boot Slice Test
+    - @WebMvcTest
+        - MockMvc 빈을 자동 설정 해준다. 따라서 그냥 가져와서 쓰면 됨.
+        - 웹 관련 빈만 등록해 준다. (슬라이스)
+    
+    - MockMvc
+        - 웹서버를 띄우지 않고도 Spring MVC (DispatcherServlet)가 요청을 처리하는 과정을 설정할 수 있기 때문에 Controller 테스트용으로 자주 쓰임.
+    
+- 테스트 할 내용
+    1. 입력값들을 전달하면 JSON 응답으로 201 (Status OK) 확인
+        - Location Header에 생성된 이벤트를 조회할 수 있는 URI 확인
+        - ID는 DB에 들어갈 때 자동생성된 값으로 나오는지 확인
+        
+    1. 입력 값으로 id, eventStatus, offline, free 등의 데이터를 전달하는 경우
+        1. Bad_Request로 응답하는 방법
+        1. 받기로 한 값 이외에는 무시하는 방법
+        
+        - a 방법 사용. Event(모델)과는 다른 객체 EventDto 생성(프레임워크 내에서 전달)
+    
+    1. 입력 데이터가 이상한 경우 Bad_Request로 응답
+        - 입력값이 이상한 경우 에러
+        - 비즈니스 로직으로 검사할 수 있는 에러
+            - 전달받은 일자들에 오류가 있는 경우
+            - basePrice 보다 maxPrice가 더 적은 경우
+            - ...
+        - 에러 응답 메시지에 에러에 대한 정보 필요
+    
+    1. 비즈니스 로직이 적용되었는지 응답 메시지 확인 (출력해서 확인) 
+        - 장소 유무에 따른 offline 설정
+        - 가격 유무에 따른 유무료 설정
+    
+    1. 응답에 HATEOAS와 link가 있는지 확인
+        - self (view 주소)
+        - update (event manager는 수정 가능)
+        - events (event 목록)
+    
+    1. Spring Docs로 API 문서 만들기
+        - request 문서화
+        - response 문서화
+        - link 문서화
+        - profile link 추가 (API 상세)

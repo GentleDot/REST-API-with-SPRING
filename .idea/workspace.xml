@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d91a007d-707d-443a-84aa-0702028bf42f" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/learn-rest-api.iml" beforeDir="false" afterPath="$PROJECT_DIR$/learn-rest-api.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/readme.md" beforeDir="false" afterPath="$PROJECT_DIR$/readme.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -270,7 +268,12 @@
       <workItem from="1576133569332" duration="599000" />
       <workItem from="1576154196757" duration="6339000" />
       <workItem from="1576227001605" duration="37000" />
-      <workItem from="1576227128129" duration="2542000" />
+      <workItem from="1576227128129" duration="4911000" />
+      <workItem from="1576413617078" duration="373000" />
+      <workItem from="1576414011438" duration="604000" />
+      <workItem from="1576415844791" duration="488000" />
+      <workItem from="1576416354969" duration="52000" />
+      <workItem from="1576592348999" duration="1897000" />
     </task>
     <servers />
   </component>
@@ -346,11 +349,12 @@
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state x="457" y="96" key="SettingsEditor/-1920.0.1920.1050/0.0.1920.1050/-1930.1080.1097.617@0.0.1920.1050" timestamp="1575339256704" />
-    <state x="-1268" y="347" key="com.intellij.ide.util.TipDialog" timestamp="1576154196751">
-      <screen x="-1920" y="0" width="1920" height="1050" />
+    <state x="652" y="347" key="com.intellij.ide.util.TipDialog" timestamp="1576415844831">
+      <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state x="-1268" y="347" key="com.intellij.ide.util.TipDialog/-1920.0.1920.1050/-1920.1080.1097.617/0.0.1920.1050@-1920.0.1920.1050" timestamp="1576134122711" />
     <state x="-1268" y="347" key="com.intellij.ide.util.TipDialog/-1920.0.1920.1050/0.0.1920.1050/-1920.1080.1097.617@-1920.0.1920.1050" timestamp="1576154196751" />
+    <state x="652" y="347" key="com.intellij.ide.util.TipDialog/-1920.0.1920.1050/0.0.1920.1050/-1920.1080.1097.617@0.0.1920.1050" timestamp="1576415844831" />
     <state x="652" y="347" key="com.intellij.ide.util.TipDialog/-1920.0.1920.1050/0.0.1920.1050/-1930.1080.1097.617@0.0.1920.1050" timestamp="1575643027028" />
     <state x="652" y="347" key="com.intellij.ide.util.TipDialog/-1920.0.1920.1050/0.0.1920.1050@0.0.1920.1050" timestamp="1575796260460" />
     <state x="1106" y="237" key="com.intellij.testIntegration.createTest.CreateTestDialog" timestamp="1575509829235">
