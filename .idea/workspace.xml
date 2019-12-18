@@ -4,6 +4,7 @@
     <list default="true" id="d91a007d-707d-443a-84aa-0702028bf42f" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/readme.md" beforeDir="false" afterPath="$PROJECT_DIR$/readme.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/gentledot/demorestapi/events/EventController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/gentledot/demorestapi/events/EventController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -101,7 +102,7 @@
       <recent name="$PROJECT_DIR$/.." />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.EventControllerTest.getEventsWithPagingAndAuthentication">
+  <component name="RunManager" selected="Spring Boot.DemoRestApiApplication">
     <configuration name="All in learn-rest-api" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="learn-rest-api" />
       <option name="PACKAGE_NAME" value="" />
@@ -273,7 +274,7 @@
       <workItem from="1576414011438" duration="604000" />
       <workItem from="1576415844791" duration="488000" />
       <workItem from="1576416354969" duration="52000" />
-      <workItem from="1576592348999" duration="1897000" />
+      <workItem from="1576592348999" duration="10363000" />
     </task>
     <servers />
   </component>
@@ -369,9 +370,10 @@
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state x="1071" y="465" width="540" height="475" key="extract.method.dialog/-1920.0.1920.1050/0.0.1920.1050/-1930.1080.1097.617@0.0.1920.1050" timestamp="1575657825151" />
-    <state x="1024" y="265" width="633" height="520" key="find.popup" timestamp="1575523625552">
+    <state x="1024" y="265" width="633" height="520" key="find.popup" timestamp="1576661771035">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
+    <state x="1024" y="265" width="633" height="520" key="find.popup/-1920.0.1920.1050/0.0.1920.1050/-1920.1080.1097.617@0.0.1920.1050" timestamp="1576661771035" />
     <state x="1024" y="265" width="633" height="520" key="find.popup/-1920.0.1920.1050/0.0.1920.1050/-1930.1080.1097.617@0.0.1920.1050" timestamp="1575523625552" />
     <state x="678" y="226" key="new project wizard" timestamp="1575796769564">
       <screen x="0" y="0" width="1920" height="1050" />
@@ -392,16 +394,6 @@
         <line-breakpoint enabled="true" type="java-line">
           <url>jar://$MAVEN_REPOSITORY$/pl/pragmatists/JUnitParams/1.1.1/JUnitParams-1.1.1.jar!/junitparams/Parameters.class</url>
           <option name="timeStamp" value="3" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/net/gentledot/demorestapi/events/EventController.java</url>
-          <line>142</line>
-          <option name="timeStamp" value="17" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/net/gentledot/demorestapi/events/EventController.java</url>
-          <line>144</line>
-          <option name="timeStamp" value="18" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

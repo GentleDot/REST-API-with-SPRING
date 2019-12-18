@@ -31,6 +31,7 @@
     1. [What is REST?](https://midnightcow.tistory.com/entry/REST-What-is-REST-1)
     1. [REST API 제대로 알고 사용하기](https://meetup.toast.com/posts/92)
     1. [REST API란?](https://jcon.tistory.com/88)
+    1. [Common Application properties](https://docs.spring.io/spring-boot/docs/current/reference/html/appendix-application-properties.html)
     
 
 ## 학습내용
@@ -266,7 +267,7 @@ REST(<b>Re</b>presentational <b>S</b>tate <b>T</b>ransfer)
     public class Event {
 ```
    
-#### Controller 생성 및 테스트 (ControllerTest)
+#### Controller 생성 및 테스트(ControllerTest) 개요
 
 - Spring Boot Slice Test
     - @WebMvcTest
@@ -309,3 +310,233 @@ REST(<b>Re</b>presentational <b>S</b>tate <b>T</b>ransfer)
         - response 문서화
         - link 문서화
         - profile link 추가 (API 상세)
+
+
+#### API 구현 : 이벤트 생성 요청 -> 201 응답 받기
+
+- @RestController
+    - class 내 모든 method에 @ResponseBody를 적용한 것과 동일함.
+    - @Controller vs @RestController
+        - Http Response Body가 생성되는 방식이 다름
+        > [@Controller vs @RestController](https://doublesprogramming.tistory.com/105)
+    
+- String이 아닌 ResponseEntity 사용
+    - String : View 사용
+    - ResponseEntity : Data + HTTP Status Code
+    - 응답코드, header, body 모두 다루기 편한 API
+    - 별도의 View를 제공하지 않는 형태로 서비스를 실행하므로 때로는 결과데이터가 예외적인 상황에서 문제가 발생할 수 있음
+    
+    ```
+    @PostMapping
+    public ResponseEntity createEvent(@RequestBody EventDto eventDto,
+                                          Errors errors) {
+    ```
+
+- 전달받는 객체와 domain 객체 분리
+    - 전달받는 event 객체는 EventDto
+    - Entity(domain)는 Event
+    - modelMapper : 두 객체를 결합하여 하나의 객체로 생성시킴
+    
+    ```
+    // 전달받은 eventDto를 Event 객체에 결합시킴.
+    Event event = this.modelMapper.map(eventDto, Event.class);
+    ```
+
+- Location URI 만들기
+    - HATEOAS가 제공하는 linkTo(), methodOn() 사용 (WebMvcLinkBuilder)
+        - linkTo(Class) : 지정한 Class에 Mapping된 URL을 가져옴.
+        - methodOn(Class.method()) : 지정한 Class 내 Method에 Mapping된 URL을 가져옴.
+          
+    ```
+    WebMvcLinkBuilder eventLinkUrl = linkTo(EventController.class);
+    WebMvcLinkBuilder selfLinkUrl = linkTo(EventController.class).slash(newEvent.getId());
+    URI createUri = selfLinkUrl.toUri();
+
+    EventEntityModel eventEntityModel = new EventEntityModel(event);
+    eventEntityModel.add(selfLinkUrl.withRel("update-event"));
+    eventEntityModel.add(eventLinkUrl.withRel("query-events"));
+    eventEntityModel.add(new Link("/docs/index.html#resources-events-create").withRel("profile"));
+    ```
+    
+- 객체를 JSON으로 변환
+    - ObjectMapper 사용
+    
+```
+@RestController
+@RequestMapping(value = "/api/events", produces = MediaTypes.HAL_JSON_VALUE)
+public class EventController {
+    private final ModelMapper modelMapper;
+    private final EventValidator eventValidator;
+    private final EventService eventService;
+
+    public EventController(ModelMapper modelMapper, EventValidator eventValidator, EventService eventService) {
+        this.modelMapper = modelMapper;
+        this.eventValidator = eventValidator;
+        this.eventService = eventService;
+    }
+    @PostMapping
+    public ResponseEntity createEvent(@RequestBody @Valid EventDto eventDto,
+                                      Errors errors,
+                                      @CurrentUser Account currentUser) {
+        if (errors.hasErrors()) {
+            return badRequest(errors);
+        }
+
+        eventValidator.validate(eventDto, errors);
+
+        if (errors.hasErrors()) {
+            return badRequest(errors);
+        }
+
+        // ModelMapper를 통해 Entity로 변환하는 과정을 생략할 수 있음.
+        /*
+        Event event = Event.eventBuilder()
+                .name(eventDto.getName())
+                .description(eventDto.getDescription())
+                .build();
+       */
+        Event event = this.modelMapper.map(eventDto, Event.class);
+        event = eventService.updateEventEntities(event);
+        event.setManager(currentUser);
+        Event newEvent = eventService.createNewEvent(event);
+
+        WebMvcLinkBuilder eventLinkUrl = linkTo(EventController.class);
+        WebMvcLinkBuilder selfLinkUrl = linkTo(EventController.class).slash(newEvent.getId());
+        URI createUri = selfLinkUrl.toUri();
+
+        EventEntityModel eventEntityModel = new EventEntityModel(event);
+        eventEntityModel.add(selfLinkUrl.withRel("update-event"));
+        eventEntityModel.add(eventLinkUrl.withRel("query-events"));
+        eventEntityModel.add(new Link("/docs/index.html#resources-events-create").withRel("profile"));
+        return ResponseEntity.created(createUri).body(eventEntityModel);
+    }
+}
+```
+
+- 테스트 내용
+    - 입력값들을 전달하면 JSON 응답으로 status code 201이 나오는지 확인
+        - Location Header에 생성된 event를 조회할 수 있는 URI가 담겨 있는지 확인.
+        - id는 DB에 저장될 때 자동생성된 값으로 나오는지 확인
+    
+    - Json 객체 내 해당하는 jsonPath가 있는지 확인 
+        - org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath
+         
+    - MediaTypes 내 UTF-8이 명시된 객체는 deprecated.
+        - MediaTypes.HAL_JSON_VALUE = "application/hal+json"
+        - 따라서 UTF-8 설정하는 @Bean을 추가하여 진행하였음.
+          
+            ```
+            // Charset = UTF-8 설정 (WebMvcTest)
+            // The bean 'characterEncodingFilter', defined in class path resource [org/springframework/boot/autoconfigure/web/servlet/HttpEncodingAutoConfiguration.class], could not be registered. A bean with that name has already been defined in net.gentledot.demorestapi.DemoRestApiApplication and overriding is disabled.
+            // Consider renaming one of the beans or enabling overriding by setting spring.main.allow-bean-definition-overriding=true
+            // ****** Spring boot 2.1 이후부터는 bean definition overriding이 false ******
+            // spring.main.allow-bean-definition-overriding=true 임에도 해당 bean 설정이 MockHttpServletResponse에 반영되지 않음.
+            // 해당 옵션을 주어 charset 설정은 bean에서 설정하도록 하면 통과는 되지만....
+            // @SpringBootApplication(exclude = HttpEncodingAutoConfiguration.class)
+            // application.properties 상에서 설정으로 해결하였음.
+            /*
+            @Bean
+            public Filter characterEncodingFilter() {
+                CharacterEncodingFilter characterEncodingFilter = new CharacterEncodingFilter();
+                characterEncodingFilter.setEncoding("UTF-8");
+                characterEncodingFilter.setForceEncoding(true);
+        
+                return characterEncodingFilter;
+            }
+            */
+            ```
+        
+        ```
+        @Test
+        @TestDescription("정상적인 이벤트를 생성하는 테스트 (201 응답)")
+        public void createEvent() throws Exception{
+            ...
+            // 요청 동작
+                mockMvc.perform(post("/api/events/")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .accept(MediaTypes.HAL_JSON)
+                        .content(objectMapper.writeValueAsString(event))
+                        .characterEncoding("UTF-8")
+                )
+                        .andDo(print())
+                        .andExpect(status().isCreated())
+                        // org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath
+                        .andExpect(jsonPath("id").exists())
+        //                .andExpect(header().exists("Location"))
+        //                .andExpect(header().string("Content-Type", "application/hal+json;charset=UTF-8"))
+                        .andExpect(header().exists(HttpHeaders.LOCATION))
+                        .andExpect(header().string(HttpHeaders.CONTENT_TYPE, CONTENT_TYPE_HAL_JSON))
+                        .andExpect(jsonPath("id").value(Matchers.not(100)))
+                        .andExpect(jsonPath("free").value(false))
+                        .andExpect(jsonPath("offline").value(true))
+                        .andExpect(jsonPath("eventStatus").value(EventStatus.DRAFT.name()))
+        } 
+        ```
+      
+#### API 구현 : EventRepository 구현
+- Spring Data JPA
+    - JpaRepository를 상속받은 interface를 만들기
+
+- Enum을 JPA Mapping시 주의
+    - @Enumerated(EnumType.STRING)
+    - enum은 default가 EnumType.ORDINAL (순서에 따라 0, 1, ..., n)
+
+- @MockBean
+    - Mockito를 사용해서 mock 객체를 만들고 Bean으로 등록해줌. (Stubbing)
+    - 주의) 기존 Bean을 테스트용 Bean이 대체
+    
+    ```
+    // @WebMvcTest는 MVC 관련 Bean을 테스트배드에 올리는 것이므로 Transaction 처리 결과는 모두 Null
+    // 따라서 Transaction에 대한 처리 방식이 어떻게 되는지 구현 필요 (Stubbing)
+    // Bean 전체를 테스트배드에 올리는 @SpringBootTest 를 설정하면 Stubbing이 불필요 (통합 테스트)
+    //    @MockBean
+    //    EventRepository eventRepository;
+  
+    // @WebMvcTest 에서 JPA 테스트가 없으므로 save에 대한 Mocking이 필요
+    // event는 eventBuilder로 생성된 객체가 아니고 ModelMapper를 통해 생성된 객체
+    // Mocking이 성립되지 않으므로 Null을 반환하게 된다.
+    //    when(eventRepository.save(event)).thenReturn(event);
+    ```
+
+- 테스트 내용
+    - 입력값을 전달하면 JSON 응답으로 201(Status OK)이 나오는지 확인
+        - Location Header내 URI 확인.
+        - id가 Auto Generated 확인.
+        
+#### API 구현 : 입력값 제한하기
+- 입력값 제한
+    - id 또는 입력 받은 데이터로 계산해야 하는 값들은 입력을 받지 않아야 한다.
+    - EventDto 적용
+    
+- Domain 객체로 값을 복사하기 위해 ModelMapper 사용
+    
+    ```
+    // pom.xml
+    <dependency>
+        <groupId>org.modelmapper</groupId>
+        <artifactId>modelmapper</artifactId>
+        <version>2.3.5</version>
+    </dependency>
+    ```
+  
+- MvcTest에서 통합 Test로 전환
+    - @WebMvcTest 빼고 다음 애노테이션 추가
+        - @SpringBootTest
+        - @AutoConfigureMockMvc
+    - Repository @MockBean 코드 제거
+    
+- ObjectMapper 커스터마이징
+    - spring.jackson.deserialization.fail-on-unknown-properties=true
+    - jackson Library
+        > [Java Json library jackson 사용법](https://www.lesstif.com/pages/viewpage.action?pageId=24445183)
+        [Java Config로 Jackson 설정하기](https://zepinos.tistory.com/32)
+
+- 테스트 내용
+    - 입력값으로 누가 id나 eventStatus, offline, free 이런 데이터까지 같이 주면?
+        - BadRequest로 응답.
+    
+    ```
+    @Test
+    @TestDescription("입력 받기로 한 값 이외의 값이 들어올 때 에러가 발생하는 테스트 (400 error)")
+    public void createEventWithBadRequestInputNotDtoData() throws Exception {}
+    ```
