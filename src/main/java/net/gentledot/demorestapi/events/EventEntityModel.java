@@ -26,7 +26,7 @@ public class EventResource extends RepresentationModel{
 
 // Resource -> EntityModel
 public class EventEntityModel extends EntityModel<Event> {
-    // getContent 에서 @JsonUnwrapped가 미리 적용되어 있음.
+    // EntityModel<T>.getContent() 에서 @JsonUnwrapped가 미리 적용되어 있음.
     public EventEntityModel(Event event, Link... links) {
         super(event, links);
         WebMvcLinkBuilder eventLink = linkTo(EventController.class);

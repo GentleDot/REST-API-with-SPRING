@@ -34,6 +34,7 @@
 
 * 문서
     1. [Spring HATEOAS Reference](https://docs.spring.io/spring-hateoas/docs/current/reference/html)
+    1. [Spring REST Docs Reference](https://docs.spring.io/spring-restdocs/docs/2.0.2.RELEASE/reference/html5/)
     1. [MAVEN WINDOWS 설치 - 제타위키](https://zetawiki.com/wiki/%EC%9C%88%EB%8F%84%EC%9A%B0_%EB%A9%94%EC%9D%B4%EB%B8%90_%EC%84%A4%EC%B9%98)
     1. [What is REST?](https://midnightcow.tistory.com/entry/REST-What-is-REST-1)
     1. [REST API 제대로 알고 사용하기](https://meetup.toast.com/posts/92)
@@ -775,4 +776,84 @@ public class EventController {
     }
     ```
 
- 
+ ### Spring HATEOAS
+ Hypermedia as the Engine of Application State (HATEOAS)
+> [Spring HATEOAS Reference](https://docs.spring.io/spring-hateoas/docs/current/reference/html)
+
+- 링크 만드는 기능
+    - 문자열 가지고 만들기
+    - 컨트롤러와 메소드로 만들기
+- 리소스 만드는 기능
+    - 리소스: 데이터 + 링크
+- 링크 찾아주는 기능
+    - Traverson
+    - LinkDiscoverers
+- 링크 ​
+    - HREF
+    - REL ​
+        - self
+        - profile
+        - update-event
+        - event-list
+
+- 1.0 버전으로 오면서 변경점
+>Representation models  
+>The ResourceSupport/Resource/Resources/PagedResources group of classes never really felt appropriately named. After all, these types do not actually manifest resources but rather representation models that can be enriched with hypermedia information and affordances. Here’s how new names map to the old ones:
+>- ResourceSupport is now RepresentationModel
+>- Resource is now EntityModel
+>- Resources is now CollectionModel
+>- PagedResources is now PagedModel
+
+
+- EventModel 생성
+    - extends RepresentationModel의 문제 : "_embedded" 로 감싸짐 
+        - @JsonUnwrapped 사용
+        - 또는 extends EntityModel<T> 로 상속하여 객체 생성
+        
+        ```
+        package net.gentledot.demorestapi.events;
+        
+        import org.springframework.hateoas.EntityModel;
+        import org.springframework.hateoas.Link;
+        import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
+        
+        import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+        
+        /*
+        // ResourceSupport -> RepresentationModel
+        public class EventResource extends RepresentationModel{
+        
+            // event 의 속성으로 event 객체 내용을 감싸 출력되지 않도록 설정
+            @JsonUnwrapped
+            private Event event;
+        
+            public EventResource(Event event) {
+                this.event = event;
+            }
+        
+            public Event getEvent() {
+                return event;
+            }
+        }
+        */
+        
+        // Resource -> EntityModel
+        public class EventEntityModel extends EntityModel<Event> {
+            // EntityModel<T>.getContent() 에서 @JsonUnwrapped가 미리 적용되어 있음.
+            public EventEntityModel(Event event, Link... links) {
+                super(event, links);
+                WebMvcLinkBuilder eventLink = linkTo(EventController.class);
+                add(eventLink.slash(event.getId()).withSelfRel());
+            }
+        }
+        ```
+      
+- 테스트 내용
+    - 응답에 HATEOAS와 profile 관련 링크 확인
+        - self (view)
+        - update (event 생성한 manager 접속 시)
+        - events (목록으로 가는 링크)
+        
+
+### Spring REST Docs
+[Spring REST Docs Reference](https://docs.spring.io/spring-restdocs/docs/2.0.2.RELEASE/reference/html5/)

@@ -4,8 +4,7 @@
     <list default="true" id="d91a007d-707d-443a-84aa-0702028bf42f" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/readme.md" beforeDir="false" afterPath="$PROJECT_DIR$/readme.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/gentledot/demorestapi/events/EventController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/gentledot/demorestapi/events/EventController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/gentledot/demorestapi/events/EventValidator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/gentledot/demorestapi/events/EventValidator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/gentledot/demorestapi/events/EventEntityModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/gentledot/demorestapi/events/EventEntityModel.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -275,7 +274,7 @@
       <workItem from="1576414011438" duration="604000" />
       <workItem from="1576415844791" duration="488000" />
       <workItem from="1576416354969" duration="52000" />
-      <workItem from="1576592348999" duration="14480000" />
+      <workItem from="1576592348999" duration="16793000" />
     </task>
     <servers />
   </component>
@@ -355,6 +354,10 @@
     </state>
     <state width="1112" height="418" key="GridCell.Tab.1.right/-1920.0.1920.1050/0.0.1920.1050/-1920.1080.1097.617@0.0.1920.1050" timestamp="1576665362341" />
     <state width="1112" height="330" key="GridCell.Tab.1.right/-1920.0.1920.1050/0.0.1920.1050/-1930.1080.1097.617@0.0.1920.1050" timestamp="1575662817781" />
+    <state x="908" y="274" key="IDE.errors.dialog" timestamp="1576852903945">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state x="908" y="274" key="IDE.errors.dialog/-1920.0.1920.1050/0.0.1920.1050/-1920.1080.1097.617@0.0.1920.1050" timestamp="1576852903945" />
     <state x="457" y="96" key="SettingsEditor" timestamp="1575339256704">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
@@ -392,9 +395,10 @@
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state x="1049" y="151" key="refactoring.ChangeSignatureDialog/-1920.0.1920.1050/0.0.1920.1050/-1930.1080.1097.617@0.0.1920.1050" timestamp="1575657628720" />
-    <state x="1004" y="231" width="672" height="678" key="search.everywhere.popup" timestamp="1575661048617">
+    <state x="1004" y="231" width="672" height="678" key="search.everywhere.popup" timestamp="1576853541390">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
+    <state x="1004" y="231" width="672" height="678" key="search.everywhere.popup/-1920.0.1920.1050/0.0.1920.1050/-1920.1080.1097.617@0.0.1920.1050" timestamp="1576853541390" />
     <state x="1004" y="231" width="672" height="678" key="search.everywhere.popup/-1920.0.1920.1050/0.0.1920.1050/-1930.1080.1097.617@0.0.1920.1050" timestamp="1575661048617" />
   </component>
   <component name="XDebuggerManager">
