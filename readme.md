@@ -14,7 +14,14 @@
     - [EVENT API](#EVENT-API)
     - [Project 생성](#Project-생성)
     - [EVENT API 구현](#EVENT-API-구현)
-
+        - [생성 API 구현](#생성-API-구현)
+        - [Controller 생성 및 테스트 개요](#Controller-생성-및-테스트(ControllerTest)-개요)
+        - [이벤트 생성 요청하여 201 응답 받기](#API-구현_이벤트-생성-요청하여-201-응답-받기)
+        - [EventRepository 구현](#API-구현_EventRepository-구현)
+        - [입력값 제한하기](#API-구현_입력값-제한하기)
+        - [Bad Request 처리](#API-구현_Bad-Request-처리)
+    -         
+    
 ## 목표
 1. 스프링부트 기본기 습득
 2. 테스트 주도 개발(TDD) 익히기
@@ -32,6 +39,7 @@
     1. [REST API 제대로 알고 사용하기](https://meetup.toast.com/posts/92)
     1. [REST API란?](https://jcon.tistory.com/88)
     1. [Common Application properties](https://docs.spring.io/spring-boot/docs/current/reference/html/appendix-application-properties.html)
+    1. [자바 커스텀 어노테이션 만들기](https://advenoh.tistory.com/21)
     
 
 ## 학습내용
@@ -312,7 +320,7 @@ REST(<b>Re</b>presentational <b>S</b>tate <b>T</b>ransfer)
         - profile link 추가 (API 상세)
 
 
-#### API 구현 : 이벤트 생성 요청 -> 201 응답 받기
+#### API 구현_이벤트 생성 요청하여 201 응답 받기
 
 - @RestController
     - class 내 모든 method에 @ResponseBody를 적용한 것과 동일함.
@@ -473,7 +481,7 @@ public class EventController {
         } 
         ```
       
-#### API 구현 : EventRepository 구현
+#### API 구현_EventRepository 구현
 - Spring Data JPA
     - JpaRepository를 상속받은 interface를 만들기
 
@@ -503,7 +511,7 @@ public class EventController {
         - Location Header내 URI 확인.
         - id가 Auto Generated 확인.
         
-#### API 구현 : 입력값 제한하기
+#### API 구현_입력값 제한하기
 - 입력값 제한
     - id 또는 입력 받은 데이터로 계산해야 하는 값들은 입력을 받지 않아야 한다.
     - EventDto 적용
@@ -540,3 +548,231 @@ public class EventController {
     @TestDescription("입력 받기로 한 값 이외의 값이 들어올 때 에러가 발생하는 테스트 (400 error)")
     public void createEventWithBadRequestInputNotDtoData() throws Exception {}
     ```
+
+#### API 구현_Bad Request 처리
+- @Valid와 BindingResult (또는 Errors)
+    - BindingResult는 항상 @Valid 바로 다음 인자로 사용해야 함. (스프링 MVC)
+    - @NotNull, @NotEmpty, @Min, @Max, ... 사용해서 입력값 바인딩할 때 에러 확인할 수
+    있음
+    
+    ```
+    package net.gentledot.demorestapi.events;
+    
+    import lombok.AllArgsConstructor;
+    import lombok.Builder;
+    import lombok.Data;
+    import lombok.NoArgsConstructor;
+    
+    import javax.validation.constraints.Min;
+    import javax.validation.constraints.NotEmpty;
+    import javax.validation.constraints.NotNull;
+    import java.time.LocalDateTime;
+    
+    @Builder
+    @NoArgsConstructor
+    @AllArgsConstructor
+    @Data
+    public class EventDto {
+    
+        @NotEmpty
+        private String name;    // 이벤트 이름
+        @NotEmpty
+        private String description;     // 이벤트 설명
+        @NotNull
+        private LocalDateTime beginEnrollmentDateTime;  // 등록 시작일시
+        @NotNull
+        private LocalDateTime closeEnrollmentDateTime;  // 등록 종료일시
+        @NotNull
+        private LocalDateTime beginEventDateTime;   // 이벤트 시작일시
+        @NotNull
+        private LocalDateTime endEventDateTime;     // 이벤트 종료일시
+        private String location; // 장소 (optional) 이게 없으면 온라인 모임
+        @Min(0)
+        private int basePrice; // (optional)
+        @Min(0)
+        private int maxPrice; // (optional)
+        @Min(0)
+        private int limitOfEnrollment;
+    }
+    ```
+- Domain Validator 생성
+    - Validator 인터페이스 없이 만들어도 무관.
+    ```
+    package net.gentledot.demorestapi.events;
+    
+    import org.springframework.stereotype.Component;
+    import org.springframework.validation.Errors;
+    
+    import java.time.LocalDateTime;
+    
+    @Component
+    public class EventValidator {
+    
+        public void validate(EventDto eventDto, Errors errors) {
+            int basePrice = eventDto.getBasePrice();
+            int maxPrice = eventDto.getMaxPrice();
+            LocalDateTime beginEventDateTime = eventDto.getBeginEventDateTime();
+            LocalDateTime endEventDateTime = eventDto.getEndEventDateTime();
+            LocalDateTime beginEnrollmentDateTime = eventDto.getBeginEnrollmentDateTime();
+            LocalDateTime closeEnrollmentDateTime = eventDto.getCloseEnrollmentDateTime();
+    
+            if (maxPrice > 0 && basePrice > maxPrice) {
+                errors.rejectValue("basePrice", "wrongValue", "BasePrice is wrong.");
+                errors.rejectValue("maxPrice", "wrongValue", "MaxPrice is wrong.");
+            }
+    
+            if (beginEnrollmentDateTime.isAfter(endEventDateTime) ||
+                    beginEnrollmentDateTime.isAfter(beginEventDateTime) ||
+                    beginEnrollmentDateTime.isAfter(closeEnrollmentDateTime)) {
+                errors.rejectValue("beginEnrollmentDateTime", "wrongValue", "beginEnrollmentDateTime is wrong.");
+            }
+    
+            if (closeEnrollmentDateTime.isAfter(endEventDateTime) ||
+                    closeEnrollmentDateTime.isAfter(beginEventDateTime) ||
+                    closeEnrollmentDateTime.isBefore(beginEnrollmentDateTime)) {
+                errors.rejectValue("closeEnrollmentDateTime", "wrongValue", "closeEnrollmentDateTime is wrong.");
+            }
+    
+            if (beginEventDateTime.isAfter(endEventDateTime) ||
+                    beginEventDateTime.isBefore(closeEnrollmentDateTime) ||
+                    beginEventDateTime.isBefore(beginEnrollmentDateTime)) {
+                errors.rejectValue("beginEventDateTime", "wrongValue", "BeginEventDateTime is wrong.");
+            }
+    
+            if (endEventDateTime.isBefore(beginEventDateTime) ||
+                    endEventDateTime.isBefore(closeEnrollmentDateTime) ||
+                    endEventDateTime.isBefore(beginEnrollmentDateTime)) {
+                errors.rejectValue("endEventDateTime", "wrongValue", "EndEventDateTime is wrong.");
+            }
+        }
+    }
+    ```
+
+- 테스트 설명용 Annotation 생성
+    > [자바 커스텀 어노테이션 만들기](https://advenoh.tistory.com/21)
+ 
+    - @Target, @Retention
+    
+    ```
+    package net.gentledot.demorestapi.common;
+    
+    import java.lang.annotation.ElementType;
+    import java.lang.annotation.Retention;
+    import java.lang.annotation.RetentionPolicy;
+    import java.lang.annotation.Target;
+    
+    @Target(ElementType.METHOD)
+    @Retention(RetentionPolicy.SOURCE)
+    public @interface TestDescription {
+        String value();
+    }
+    ```
+  
+- 테스트 내용
+    - 입력 데이터가 이상한 경우 Bad_Request로 응답
+        - 입력값(eventDto)이 이상한 경우 에러
+        - 비즈니스 로직으로 검사할 수 있는 에러
+        - **에러 응답 메시지에 에러에 대한 정보 출력**
+        
+        ```
+        @Test
+        @TestDescription("빈값이 들어올 때 에러를 발생하는 테스트 (400 error)")
+        public void createEventWithBadRequestEmptyInput() throws Exception
+      
+        @Test
+        @TestDescription("정상적이지 않은 값이 들어올 때 에러가 발생하는 테스트 (400 error)")
+        public void createEventWithBadRequestWrongInput() throws Exception
+        ``` 
+      
+- Custom JSON Serializer 생성
+    ```
+    package net.gentledot.demorestapi.common;
+    
+    import com.fasterxml.jackson.core.JsonGenerator;
+    import com.fasterxml.jackson.databind.JsonSerializer;
+    import com.fasterxml.jackson.databind.SerializerProvider;
+    import org.springframework.boot.jackson.JsonComponent;
+    import org.springframework.validation.Errors;
+    
+    import java.io.IOException;
+    
+    /*
+    * Serialize : 객체 -> Json 변환
+    * Deserialize : Json -> 객체 변환
+    * */
+    @JsonComponent
+    public class ErrorsSerializer extends JsonSerializer<Errors> {
+    
+        @Override
+        public void serialize(Errors errors, JsonGenerator jsonGenerator, SerializerProvider serializerProvider) throws IOException {
+            jsonGenerator.writeStartArray();
+            errors.getFieldErrors().forEach( e -> {
+                Object rejectedValue = e.getRejectedValue();
+    
+                try {
+                    jsonGenerator.writeStartObject();
+                    jsonGenerator.writeStringField("field", e.getField());
+                    jsonGenerator.writeStringField("objectName", e.getObjectName());
+                    jsonGenerator.writeStringField("code", e.getCode());
+                    jsonGenerator.writeStringField("defaultMessage", e.getDefaultMessage());
+                    if (rejectedValue != null){
+                        jsonGenerator.writeStringField("rejectedValue", rejectedValue.toString());
+                    }
+                    jsonGenerator.writeEndObject();
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+            });
+            errors.getGlobalErrors().forEach(e -> {
+                try {
+                    jsonGenerator.writeStartObject();
+                    jsonGenerator.writeStringField("objectName", e.getObjectName());
+                    jsonGenerator.writeStringField("code", e.getCode());
+                    jsonGenerator.writeStringField("defaultMessage", e.getDefaultMessage());
+                    jsonGenerator.writeEndObject();
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+            });
+            jsonGenerator.writeEndArray();
+        }
+    }
+    ```
+  
+    - extends JsonSerializer<T> (Jackson JSON 제공)
+    - @JsonComponent (스프링 부트 제공)
+    
+    - BindingError
+        - FieldError 와 GlobalError (ObjectError)가 있음
+        - objectName
+        - defaultMessage
+        - code
+        - field
+        - rejectedValue
+
+*** 테스트 코드 작성 시 매개변수를 사용할 수 있도록 설정
+
+- [JunitParams](https://github.com/Pragmatists/JUnitParams)
+    ```
+    <dependency>
+        <groupId>pl.pragmatists</groupId>
+        <artifactId>JUnitParams</artifactId>
+        <version>1.1.1</version>
+        <scope>test</scope>
+    </dependency>
+    ```
+    
+    ```
+    private Event generateEvent(int index) {
+        Event event = buildEvent(index);
+        return this.eventRepository.save(event);
+    }
+    
+    private Event generateEvent(int index, Account account) {
+        Event event = buildEvent(index);
+        event.setManager(account);
+        return this.eventRepository.save(event);
+    }
+    ```
+
+ 
