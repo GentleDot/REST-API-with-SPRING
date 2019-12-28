@@ -1,7 +1,7 @@
 package net.gentledot.demorestapi.index;
 
 import net.gentledot.demorestapi.common.BaseControllerTest;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;

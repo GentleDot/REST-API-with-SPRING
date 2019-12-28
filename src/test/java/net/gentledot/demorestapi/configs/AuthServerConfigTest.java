@@ -3,8 +3,8 @@ package net.gentledot.demorestapi.configs;
 import net.gentledot.demorestapi.accounts.AccountService;
 import net.gentledot.demorestapi.common.AppProperties;
 import net.gentledot.demorestapi.common.BaseControllerTest;
-import net.gentledot.demorestapi.common.TestDescription;
-import org.junit.Test;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.httpBasic;
@@ -22,7 +22,7 @@ public class AuthServerConfigTest extends BaseControllerTest {
     AppProperties properties;
 
     @Test
-    @TestDescription("인증 토큰을 발급 받는 테스트 (Grant type : password)")
+    @DisplayName("인증 토큰을 발급 받는 테스트 (Grant type : password)")
     public void getAuthToken() throws Exception {
         this.mockMvc.perform(post("/oauth/token")
                 .with(httpBasic(properties.getClientId(), properties.getClientSecret()))

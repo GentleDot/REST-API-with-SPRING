@@ -2,28 +2,25 @@ package net.gentledot.demorestapi.accounts;
 
 import org.hamcrest.Matchers;
 import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.migrationsupport.rules.EnableRuleMigrationSupport;
 import org.junit.rules.ExpectedException;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.annotation.Role;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.fail;
-import static org.springframework.beans.factory.config.BeanDefinition.ROLE_INFRASTRUCTURE;
 
-@RunWith(SpringRunner.class)
+
 @SpringBootTest
+@EnableRuleMigrationSupport
 @ActiveProfiles("test")
 public class AccountServiceTest {
 
@@ -37,6 +34,7 @@ public class AccountServiceTest {
     PasswordEncoder passwordEncoder;
 
     @Test
+    @DisplayName("생성된 Account를 Username으로 찾고 입력한 password와 일치하는지 확인.")
     public void findByUserName() {
         // given
 
@@ -60,14 +58,8 @@ public class AccountServiceTest {
     }
 
     @Test
+    @DisplayName("(UsernameNotFoundException)생성되지 않은 Account의 username으로 찾았을 때 exception 발생.")
     public void failedFindByUserName() {
-//        String userName = "test@hotmail.com";
-//        try {
-//            accountService.loadUserByUsername(userName);
-//            fail("테스트 실패되었음.");
-//        } catch (UsernameNotFoundException e) {
-//            assertThat(e.getMessage()).containsSequence(userName);
-//        }
 
         // expected
         String userName = "test@hotmail.com";

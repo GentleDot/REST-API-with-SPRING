@@ -1,17 +1,19 @@
 package net.gentledot.demorestapi.events;
 
-
-import junitparams.JUnitParamsRunner;
-import junitparams.Parameters;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@RunWith(JUnitParamsRunner.class)
+@ExtendWith(SpringExtension.class)
 public class EventTest {
 
     @Test
+    @DisplayName("Event entity를 builder로 생성.")
     public void builder() {
         Event event = Event.eventBuilder()
                 .name("my Spring REST API")
@@ -21,6 +23,7 @@ public class EventTest {
     }
 
     @Test
+    @DisplayName("@Getter, @Setter annotation test (Event entity가 lombok annotation으로 만들었기 때문에)")
     public void javaBean() {
         // Given
         String name = "Event";
@@ -36,8 +39,9 @@ public class EventTest {
         assertThat(event.getDescription()).isEqualTo(description);
     }
 
-    @Test
-    @Parameters
+    @ParameterizedTest(name = "[{index}] {displayName} - basePrice = {0}, maxPrice = {1}, isFree = {2}")
+    @DisplayName("Event 참가비 테스트")
+    @MethodSource("parametersForTestSetFree")
     public void testSetFree(int basePrice, int maxPrice, boolean isFree) {
         // given
         Event event = Event.eventBuilder()
@@ -52,7 +56,7 @@ public class EventTest {
         assertThat(event.isFree()).isEqualTo(isFree);
     }
 
-    private Object[] parametersForTestSetFree() {
+    private static Object[] parametersForTestSetFree() {
         return new Object[]{
                 new Object[]{0, 0, true},
                 new Object[]{100, 0, false},
@@ -61,8 +65,9 @@ public class EventTest {
         };
     }
 
-    @Test
-    @Parameters(method = "paramsForTestSetOffline")
+    @ParameterizedTest(name = "[{index}] {displayName} - location = {0}, isOffline = {1}")
+    @DisplayName("Event 장소 설정 테스트")
+    @MethodSource("paramsForTestSetOffline")
     public void testSetOffline(String location, boolean isOffline) {
         // given
         Event event = Event.eventBuilder()
@@ -76,7 +81,7 @@ public class EventTest {
         assertThat(event.isOffline()).isEqualTo(isOffline);
     }
 
-    private Object[] paramsForTestSetOffline() {
+    private static Object[] paramsForTestSetOffline() {
         return new Object[]{
                 new Object[]{"location Test", true},
                 new Object[]{"강남역 2번출구 앞 강남빌딩", true},
