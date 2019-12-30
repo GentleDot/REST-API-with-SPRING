@@ -58,6 +58,12 @@
             <artifactId>postgresql</artifactId>
             <!--            <scope>runtime</scope>-->
         </dependency>
+        <!-- Library for springdoc-openapi integration with spring-boot and swagger-ui -->
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-ui</artifactId>
+            <version>LATEST</version>
+        </dependency>
 
         <dependency>
             <groupId>com.h2database</groupId>

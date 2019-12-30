@@ -21,7 +21,15 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
         http.anonymous()
                 .and()
                 .authorizeRequests()
-                .mvcMatchers(HttpMethod.GET, "/api/**")
+//                .mvcMatchers(HttpMethod.GET, "/api/**")
+                .antMatchers(HttpMethod.GET,
+                        "/api/**",
+                        "/swagger-resources/**",
+                        "/swagger-ui.html**",
+                        "/swagger-ui/**",
+                        "/v3/api-docs**",
+                        "/webjars/**",
+                        "favicon.ico")
                 .permitAll()
                 .anyRequest().authenticated()
                 .and()
