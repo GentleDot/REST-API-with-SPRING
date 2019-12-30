@@ -22,18 +22,12 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
                 .and()
                 .authorizeRequests()
 //                .mvcMatchers(HttpMethod.GET, "/api/**")
-                .antMatchers(HttpMethod.GET,
-                        "/api/**",
-                        "/swagger-resources/**",
-                        "/swagger-ui.html**",
-                        "/swagger-ui/**",
-                        "/v3/api-docs**",
-                        "/webjars/**",
-                        "favicon.ico")
+                .mvcMatchers(HttpMethod.GET, "/api/**"
+                        , "/swagger-resources/**", "/api-docs**")
                 .permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .exceptionHandling()
-                    .accessDeniedHandler(new OAuth2AccessDeniedHandler());
+                .accessDeniedHandler(new OAuth2AccessDeniedHandler());
     }
 }

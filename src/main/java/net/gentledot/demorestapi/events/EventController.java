@@ -1,5 +1,12 @@
 package net.gentledot.demorestapi.events;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import net.gentledot.demorestapi.accounts.Account;
 import net.gentledot.demorestapi.accounts.CurrentUser;
 import net.gentledot.demorestapi.common.ErrorEntityModel;
@@ -25,7 +32,7 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 
 // import static org.springframework.hateoas.server.mvc.ControllerLinkBuilder.linkTo << deprecated
 
-
+@Tag(name = "이벤트", description = "이벤트 API")
 @RestController
 @RequestMapping(value = "/api/events", produces = MediaTypes.HAL_JSON_VALUE)
 public class EventController {
@@ -42,9 +49,10 @@ public class EventController {
         this.eventService = eventService;
     }
 
-
+    @Operation(summary = "이벤트 생성", description = "이 기능은 로그인하여 권한이 주어져야 작동합니다.")
+    @ApiResponses(value = {@ApiResponse(description = "성공적인 동작", content = {@Content(mediaType = "application/hal+json;charset=UTF-8", schema = @Schema(implementation = Event.class))})})
     @PostMapping
-    public ResponseEntity createEvent(@RequestBody @Valid EventDto eventDto,
+    public ResponseEntity createEvent(@Parameter(description = "이벤트 객체 생성") @RequestBody @Valid EventDto eventDto,
                                       Errors errors,
                                       @CurrentUser Account currentUser) {
         if (errors.hasErrors()) {
@@ -80,9 +88,10 @@ public class EventController {
         return ResponseEntity.created(createUri).body(eventEntityModel);
     }
 
+    @Operation(summary = "이벤트 목록 확인", description = "생성된 이벤트 목록을 paging 하여 출력합니다.")
     @GetMapping
-    public ResponseEntity getEvents(Pageable pageable, PagedResourcesAssembler<Event> resourcesAssembler
-            , @CurrentUser Account currentUser) {
+    public ResponseEntity getEvents(@Parameter(hidden = true) Pageable pageable, @Parameter(hidden = true) PagedResourcesAssembler<Event> resourcesAssembler
+            , @Parameter(hidden = true) @CurrentUser Account currentUser) {
 //        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 //        User principal = (org.springframework.security.core.userdetails.User)authentication.getPrincipal();
 
@@ -97,9 +106,10 @@ public class EventController {
         return ResponseEntity.ok(entityModels);
     }
 
+    @Operation(summary = "이벤트 조회", description = "/{id}의 Event를 조회합니다.")
     @GetMapping("/{id}")
-    public ResponseEntity getEvent(@PathVariable Integer id,
-                                   @CurrentUser Account currentUser) {
+    public ResponseEntity getEvent(@Parameter(required = true) @PathVariable Integer id,
+                                   @Parameter(hidden = true) @CurrentUser Account currentUser) {
         Optional<Event> optionalEvent = this.eventService.getEvent(id);
 
         if (optionalEvent.isEmpty()) {
@@ -116,11 +126,12 @@ public class EventController {
         return ResponseEntity.ok(eventEntityModel);
     }
 
+    @Operation(summary = "이벤트 수정", description = "/{id}의 Event를 수정합니다.")
     @PutMapping("/{id}")
-    public ResponseEntity updateEvent(@PathVariable Integer id,
+    public ResponseEntity updateEvent(@Parameter(required = true) @PathVariable Integer id,
                                       @RequestBody @Valid EventDto eventDto,
-                                      Errors errors,
-                                      @CurrentUser Account currentUser) {
+                                      @Parameter(hidden = true) Errors errors,
+                                      @Parameter(hidden = true) @CurrentUser Account currentUser) {
         Optional<Event> optionalEvent = this.eventService.getEvent(id);
 
         if (optionalEvent.isEmpty()) {
