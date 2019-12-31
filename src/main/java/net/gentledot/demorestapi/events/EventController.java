@@ -108,10 +108,10 @@ public class EventController {
         return ResponseEntity.ok(entityModels);
     }
 
-    @Operation(summary = "이벤트 조회", description = "/{id}의 Event를 조회합니다.")
+    @Operation(summary = "이벤트 조회", description = "/{id}의 Event를 조회합니다. \n 로그인 사용자 정보가 있으면 수정 URL 추가됨.")
     @GetMapping("/{id}")
     public ResponseEntity getEvent(@Parameter(required = true, description = "이벤트 ID") @PathVariable Integer id,
-                                   @Parameter(required = false, description = "로그인 사용자 정보가 있으면 수정 URL 추가됨.", allowEmptyValue = true) @CurrentUser Account currentUser) {
+                                   @Parameter(hidden = true) @CurrentUser Account currentUser) {
         Optional<Event> optionalEvent = this.eventService.getEvent(id);
 
         if (optionalEvent.isEmpty()) {
