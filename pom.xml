@@ -64,6 +64,18 @@
             <artifactId>springdoc-openapi-ui</artifactId>
             <version>LATEST</version>
         </dependency>
+        <!-- Mapping Pageable (spring-date-commons) object to correct URL-Parameter in Swagger UI -->
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-data-rest</artifactId>
+            <version>LATEST</version>
+        </dependency>
+        <!-- To ignore @AuthenticationPrincipal parameter from spring-security -->
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-security</artifactId>
+            <version>LATEST</version>
+        </dependency>
 
         <dependency>
             <groupId>com.h2database</groupId>

@@ -6,6 +6,7 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import net.gentledot.demorestapi.accounts.Account;
 import net.gentledot.demorestapi.accounts.CurrentUser;
@@ -49,12 +50,12 @@ public class EventController {
         this.eventService = eventService;
     }
 
-    @Operation(summary = "이벤트 생성", description = "이 기능은 로그인하여 권한이 주어져야 작동합니다.")
-    @ApiResponses(value = {@ApiResponse(description = "성공적인 동작", content = {@Content(mediaType = "application/hal+json;charset=UTF-8", schema = @Schema(implementation = Event.class))})})
+    @Operation(summary = "이벤트 생성", description = "이 기능은 로그인하여 권한이 주어져야 작동합니다.", security = {@SecurityRequirement(name = "bearer-key")})
+    @ApiResponses(value = {@ApiResponse(description = "성공적인 동작 (_links 생략)", content = {@Content(mediaType = "application/hal+json;charset=UTF-8", schema = @Schema(implementation = Event.class))})})
     @PostMapping
-    public ResponseEntity createEvent(@Parameter(description = "이벤트 객체 생성") @RequestBody @Valid EventDto eventDto,
-                                      Errors errors,
-                                      @CurrentUser Account currentUser) {
+    public ResponseEntity createEvent(@RequestBody @Valid @Parameter(name = "이벤트 정보", description = "이벤트 객체 생성") EventDto eventDto,
+                                      @Parameter(hidden = true) Errors errors,
+                                      @Parameter(hidden = true) @CurrentUser Account currentUser) {
         if (errors.hasErrors()) {
             return badRequest(errors);
         }
@@ -90,7 +91,8 @@ public class EventController {
 
     @Operation(summary = "이벤트 목록 확인", description = "생성된 이벤트 목록을 paging 하여 출력합니다.")
     @GetMapping
-    public ResponseEntity getEvents(@Parameter(hidden = true) Pageable pageable, @Parameter(hidden = true) PagedResourcesAssembler<Event> resourcesAssembler
+    public ResponseEntity getEvents(@Parameter(hidden = true) Pageable pageable
+            , @Parameter(hidden = true) PagedResourcesAssembler<Event> resourcesAssembler
             , @Parameter(hidden = true) @CurrentUser Account currentUser) {
 //        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 //        User principal = (org.springframework.security.core.userdetails.User)authentication.getPrincipal();
@@ -108,8 +110,8 @@ public class EventController {
 
     @Operation(summary = "이벤트 조회", description = "/{id}의 Event를 조회합니다.")
     @GetMapping("/{id}")
-    public ResponseEntity getEvent(@Parameter(required = true) @PathVariable Integer id,
-                                   @Parameter(hidden = true) @CurrentUser Account currentUser) {
+    public ResponseEntity getEvent(@Parameter(required = true, description = "이벤트 ID") @PathVariable Integer id,
+                                   @Parameter(required = false, description = "로그인 사용자 정보가 있으면 수정 URL 추가됨.", allowEmptyValue = true) @CurrentUser Account currentUser) {
         Optional<Event> optionalEvent = this.eventService.getEvent(id);
 
         if (optionalEvent.isEmpty()) {
@@ -126,10 +128,10 @@ public class EventController {
         return ResponseEntity.ok(eventEntityModel);
     }
 
-    @Operation(summary = "이벤트 수정", description = "/{id}의 Event를 수정합니다.")
+    @Operation(summary = "이벤트 수정", description = "/{id}의 Event를 수정합니다. \n 이 기능은 로그인하여 권한이 주어져야 작동합니다.", security = {@SecurityRequirement(name = "bearer-key")})
     @PutMapping("/{id}")
-    public ResponseEntity updateEvent(@Parameter(required = true) @PathVariable Integer id,
-                                      @RequestBody @Valid EventDto eventDto,
+    public ResponseEntity updateEvent(@Parameter(required = true, description = "이벤트 ID") @PathVariable Integer id,
+                                      @Parameter(name = "이벤트 정보", description = "이벤트 객체 생성") @RequestBody @Valid EventDto eventDto,
                                       @Parameter(hidden = true) Errors errors,
                                       @Parameter(hidden = true) @CurrentUser Account currentUser) {
         Optional<Event> optionalEvent = this.eventService.getEvent(id);

@@ -45,7 +45,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     // security 대상 제외하여 인가
     @Override
     public void configure(WebSecurity web) {
-        web.ignoring().mvcMatchers("/docs/index.html", "/swagger-ui/**", "/swagger-ui.html**");
+        web.ignoring().mvcMatchers("/docs/index.html", "/swagger-ui/**", "/swagger.html**");
 //        web.ignoring().antMatchers("/swagger-resources/**", "/v3/api-docs**");
         web.ignoring().requestMatchers(PathRequest.toStaticResources().atCommonLocations());
     }
