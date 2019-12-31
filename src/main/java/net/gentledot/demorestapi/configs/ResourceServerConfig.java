@@ -21,7 +21,6 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
         http.anonymous()
                 .and()
                 .authorizeRequests()
-//                .mvcMatchers(HttpMethod.GET, "/api/**")
                 .mvcMatchers(HttpMethod.GET, "/api/**"
                         , "/swagger-resources/**", "/api-docs**", "/api-docs/**")
                 .permitAll()

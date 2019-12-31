@@ -108,7 +108,7 @@ public class EventController {
         return ResponseEntity.ok(entityModels);
     }
 
-    @Operation(summary = "이벤트 조회", description = "/{id}의 Event를 조회합니다. \n 로그인 사용자 정보가 있으면 수정 URL 추가됨.")
+    @Operation(summary = "이벤트 조회", description = "/{id}의 Event를 조회합니다. 로그인 사용자 정보가 있으면 수정 URL 추가됨.")
     @GetMapping("/{id}")
     public ResponseEntity getEvent(@Parameter(required = true, description = "이벤트 ID") @PathVariable Integer id,
                                    @Parameter(hidden = true) @CurrentUser Account currentUser) {
@@ -128,7 +128,7 @@ public class EventController {
         return ResponseEntity.ok(eventEntityModel);
     }
 
-    @Operation(summary = "이벤트 수정", description = "/{id}의 Event를 수정합니다. \n 이 기능은 로그인하여 권한이 주어져야 작동합니다.", security = {@SecurityRequirement(name = "bearer-key")})
+    @Operation(summary = "이벤트 수정", description = "/{id}의 Event를 수정합니다. 이 기능은 로그인하여 권한이 주어져야 작동합니다.", security = {@SecurityRequirement(name = "bearer-key")})
     @PutMapping("/{id}")
     public ResponseEntity updateEvent(@Parameter(required = true, description = "이벤트 ID") @PathVariable Integer id,
                                       @Parameter(name = "이벤트 정보", description = "이벤트 객체 생성") @RequestBody @Valid EventDto eventDto,
